@@ -203,7 +203,7 @@
 
     <!-- Sidebar de Navegación -->
     <aside id="sidebar" class="bg-gray-900 text-white min-h-screen p-4 fixed top-0 left-0 z-40 transform -translate-x-full md:translate-x-0 flex flex-col">
-       <!-- Sidebar Content (sin cambios estructurales) -->
+       <!-- Sidebar Content -->
         <div class="flex-grow overflow-y-auto">
             <h2 class="sidebar-title text-2xl font-bold mb-1 text-blue-400">Ruta de Aprendizaje</h2>
             <h3 class="sidebar-subtitle text-xs text-gray-400 mb-6">IA Nivel Explorador</h3>
@@ -364,34 +364,1104 @@
                 </div>
             </section>
             
-            <!-- Resto de secciones con contenido y quizzes adaptados -->
-             <!-- Misión 1 Sections -->
-             <section id="m1-intro-ia" class="content-section hidden">...</section>
-             <section id="m1-python" class="content-section hidden">...</section>
-             <section id="m1-pandas" class="content-section hidden">...</section>
-             <section id="m1-visualizacion" class="content-section hidden">...</section>
-             <section id="m1-metodos-ia" class="content-section hidden">...</section>
+            <!-- Misión 1 Sections -->
+            <section id="m1-intro-ia" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado de Lección 1 -->
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">1. ¿Qué es la Inteligencia Artificial?</h3>
+                     <h4 class="text-xl font-semibold text-white mt-4 mb-2">1.1 Definición de IA</h4>
+                     <p>La IA es una rama de la informática que busca crear máquinas capaces de <b class="text-blue-300">simular tareas que normalmente requieren inteligencia humana</b>. Estas tareas incluyen aprender, razonar, percibir, resolver problemas y tomar decisiones.</p>
+                     <p class="mt-2">No es magia, son matemáticas y lógica aplicadas de formas muy ingeniosas.</p>
+
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.2 IA Débil vs. IA Fuerte</h4>
+                     <ul class="list-disc list-inside space-y-2">
+                         <li><b>IA Débil (o Estrecha):</b> Es la que vemos todos los días. Está diseñada y entrenada para una <b class="text-blue-300">tarea específica</b>. No "piensa" por sí misma, solo es muy buena en lo que hace.
+                            <br><b>Ejemplos:</b> El GPS de tu celular, el recomendador de películas de Netflix, Siri o Alexa, los filtros de spam.</li>
+                         <li><b>IA Fuerte (o General):</b> Es la IA de las películas (como "Terminator" o "Her"). Sería una máquina con una inteligencia y conciencia similares a las humanas, capaz de aprender y realizar *cualquier* tarea intelectual. <b class="text-blue-300">Esta IA aún no existe</b> y es un tema de debate e investigación.</li>
+                     </ul>
+                     <p class="mt-2 font-semibold">En este curso, nos enfocaremos 100% en la IA Débil, la herramienta que está cambiando el mundo hoy.</p>
+
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.3 ¿Por qué nuestro proyecto es un problema de IA?</h4>
+                     <p>Nuestro proyecto es encontrar la "ruta más corta" para visitar varios municipios. Esto se conoce como el <b class="text-blue-300">"Problema del Vendedor Viajero" (TSP)</b>.</p>
+                     <p class="mt-2">Podrías pensar: "¿Por qué no probamos todas las rutas posibles y elegimos la más corta?"</p>
+                     <p class="mb-2"><b>Respuesta:</b> Porque la cantidad de rutas posibles crece ¡exponencialmente! </p>
+                     <ul class="list-disc list-inside space-y-2 bg-gray-800 p-4 rounded-lg">
+                         <li>Para 5 ciudades, hay 12 rutas posibles. (Fácil)</li>
+                         <li>Para 10 ciudades, hay 181,440 rutas posibles. (Manejable)</li>
+                         <li>Para 15 ciudades, hay 43,589,145,600 rutas. (Difícil)</li>
+                         <li>Para 20 ciudades, hay 60,828,186,403,426,755,864,360,960,000 rutas. (Imposible para cualquier computadora probarlas todas).</li>
+                     </ul>
+                     <p class="mt-2">Aquí es donde entra la IA: no podemos encontrar la solución *perfecta* probando todo, así que usamos algoritmos inteligentes (como los genéticos o los de hormigas) para encontrar una solución *extremadamente buena* en un tiempo razonable.</p>
+                     
+                     <!-- Quiz Lección 1 -->
+                     <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 1</h5>
+                        <form id="quiz-m1-intro-ia" class="quiz-form" data-next="#m1-python">
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">1. El GPS de tu celular es un ejemplo de:</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="a" class="mr-2" id="q1_1_a"> a) IA Débil (o Estrecha)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="b" class="mr-2" id="q1_1_b"> b) IA Fuerte (o General)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="c" class="mr-2" id="q1_1_c"> c) No es IA</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">
+                                <h6 class="font-semibold text-yellow-400">Repaso Necesario:</h6>
+                                <ul class="list-disc list-inside text-sm mt-2"></ul>
+                            </div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-python">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m1-python" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 2 -->
+                      <h3 class="text-2xl font-semibold text-blue-300 mb-3">2. Python: El Idioma de la IA</h3>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">2.1 ¿Por qué Python?</h4>
+                    <p class="mb-2">Python es el lenguaje de programación #1 para IA y Ciencia de Datos. ¿Por qué?</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Sintaxis Sencilla:</b> Es famoso por ser fácil de leer y escribir. Se parece mucho al inglés.</li>
+                        <li><b>Gran Comunidad:</b> Millones de personas lo usan, lo que significa que es fácil encontrar ayuda y tutoriales.</li>
+                        <li><b>Librerías Poderosas:</b> Tiene herramientas (librerías) ya construidas para casi todo, especialmente para IA (Pandas, Scikit-learn, TensorFlow, PyTorch).</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.2 Variables y Tipos de Datos</h4>
+                    <p class="mb-2">Una variable es una <b class="text-blue-300">caja con una etiqueta</b> donde guardamos información. Los tipos de datos principales que usaremos son:</p>
+                    <div class="code-block"><span style="color: #ff7b72;">nombre_municipio</span> = <span style="color: #a5d6ff;">"Tunja"</span>  
+<span style="color: #79c0ff;"># Tipo: Texto (string). Se usa para palabras y frases. Siempre va entre comillas.</span>
+
+<span style="color: #ff7b72;">poblacion</span> = <span style="color: #a5d6ff;">172548</span>      
+<span style="color: #79c0ff;"># Tipo: Número Entero (integer). Se usa para números sin decimales.</span>
+
+<span style="color: #ff7b72;">latitud</span> = <span style="color: #a5d6ff;">5.53</span>      
+<span style="color: #79c0ff;"># Tipo: Número Flotante (float). Se usa para números CON decimales.</span>
+
+<span style="color: #ff7b72;">es_capital</span> = <span style="color: #a5d6ff;">True</span>        
+<span style="color: #79c0ff;"># Tipo: Booleano (boolean). Solo puede ser True (Verdadero) o False (Falso).</span></div>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.3 Estructuras de Datos: Guardando Colecciones</h4>
+                    <p class="mb-2">A menudo necesitamos guardar *muchos* datos juntos. Para eso usamos estructuras:</p>
+                    <ul class="list-disc list-inside space-y-3">
+                        <li><b>Listas `[ ]`:</b> Una colección ordenada y <b class="text-blue-300">modificable</b>. Perfecta para nuestra ruta final.
+                            <div class="code-block"><span style="color: #ff7b72;">municipios_a_visitar</span> = [<span style="color: #a5d6ff;">"Villa de Leyva"</span>, <span style="color: #a5d6ff;">"Duitama"</span>, <span style="color: #a5d6ff;">"Sogamoso"</span>]
+<span style="color: #ff7b72;">municipios_a_visitar</span>.append(<span style="color: #a5d6ff;">"Paipa"</span>) <span style="color: #79c0ff;"># Añadimos un elemento al final</span>
+print(<span style="color: #ff7b72;">municipios_a_visitar</span>[0]) <span style="color: #79c0ff;"># Accedemos al primer elemento (la cuenta empieza en 0)</span></div>
+                        </li>
+                        <li><b>Tuplas `( )`:</b> Una colección ordenada e <b class="text-blue-300">INMODIFICABLE</b>. Una vez creada, no se puede cambiar. Perfecta para nuestras coordenadas.
+                            <div class="code-block"><span style="color: #ff7b72;">coordenadas_tunja</span> = (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>)
+<span style="color: #79c0ff;"># No podemos hacer coordenadas_tunja.append(...) ¡Esto da error y eso es bueno!</span>
+<span style="color: #79c0ff;"># Así nos aseguramos de no cambiar las coordenadas por accidente.</span></div>
+                        </li>
+                         <li><b>Diccionarios `{ }`:</b> La estructura más importante para nuestro proyecto. Guarda datos en pares <b class="text-blue-300">"clave: valor"</b>.
+                            <div class="code-block"><span style="color: #79c0ff;"># Relaciona el nombre de un municipio (clave) con sus coordenadas (valor)</span>
+<span style="color: #ff7b72;">municipios_coords</span> = {
+    <span style="color: #a5d6ff;">"Tunja"</span>: (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>),
+    <span style="color: #a5d6ff;">"Duitama"</span>: (<span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">-73.03</span>)
+}
+<span style="color: #79c0ff;"># Accedemos a los datos usando la clave (el nombre)</span>
+print(<span style="color: #ff7b72;">municipios_coords</span>[<span style="color: #a5d6ff;">"Tunja"</span>]) <span style="color: #79c0ff;"># Mostrará: (5.53, -73.36)</span></div>
+                        </li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.4 Estructuras de Control: Tomando Decisiones y Repitiendo Tareas</h4>
+                     <ul class="list-disc list-inside space-y-3">
+                        <li><b>Condicionales (`if`, `elif`, `else`):</b> Para que el programa tome decisiones.
+                            <div class="code-block"><span style="color: #ff7b72;">if</span> <span style="color: #ff7b72;">poblacion</span> > <span style="color: #a5d6ff;">100000</span>:
+    print(<span style="color: #a5d6ff;">"Es una ciudad grande"</span>)
+<span style="color: #ff7b72;">elif</span> <span style="color: #ff7b72;">poblacion</span> > <span style="color: #a5d6ff;">50000</span>:
+    print(<span style="color: #a5d6ff;">"Es una ciudad mediana"</span>)
+<span style="color: #ff7b72;">else</span>:
+    print(<span style="color: #a5d6ff;">"Es un municipio"</span>)</div>
+                        </li>
+                        <li><b>Bucles `for`:</b> Para repetir una acción por cada elemento en una colección.
+                            <div class="code-block"><span style="color: #79c0ff;"># Imprime cada municipio de nuestra lista</span>
+<span style="color: #ff7b72;">for</span> <span style="color: #ff7b72;">municipio</span> <span style="color: #ff7b72;">in</span> <span style="color: #ff7b72;">municipios_a_visitar</span>:
+    print(f<span style="color: #a5d6ff;">"Visitando ahora: {municipio}"</span>)</div>
+                        </li>
+                     </ul>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.5 Funciones (`def`): Creando Nuestras Propias Recetas</h4>
+                    <p class="mb-2">Una función es un bloque de código reutilizable al que le ponemos un nombre. ¡Es una "receta" dentro de nuestra receta principal! Esto es <b class="text-blue-300">fundamental</b> para organizar nuestro proyecto.</p>
+                    <p class="mb-2"><b>Conexión al Proyecto:</b> Crearemos una función para calcular la distancia entre dos puntos, y la usaremos miles de veces.</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> math <span style="color: #79c0ff;"># Importamos la librería de matemáticas</span>
+
+<span style="color: #79c0ff;"># Definimos la función. 'punto1' y 'punto2' son los "ingredientes" (parámetros)</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">calcular_distancia</span>(<span style="color: #79c0ff;">punto1, punto2</span>):
+    distancia_x = punto2[0] - punto1[0]
+    distancia_y = punto2[1] - punto1[1]
+    distancia = math.sqrt(distancia_x**2 + distancia_y**2)
+    <span style="color: #ff7b72;">return</span> distancia <span style="color: #79c0ff;"># 'return' es el "plato terminado" que devuelve la función</span>
+
+<span style="color: #79c0ff;"># Ahora "llamamos" a la función para usarla</span>
+coords_tunja = (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>)
+coords_duitama = (<span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">-73.03</span>)
+
+dist = <span style="color: #d2a8ff;">calcular_distancia</span>(coords_tunja, coords_duitama)
+print(f<span style="color: #a5d6ff;">"La distancia es: {dist}"</span>)</div>
+                    
+                     <!-- Quiz Lección 2 -->
+                     <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 2</h5>
+                        <form id="quiz-m1-python" class="quiz-form" data-next="#m1-pandas">
+                             <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">1. ¿Qué tipo de estructura usarías para guardar las coordenadas (latitud, longitud) de una ciudad si NO quieres que se modifiquen por accidente?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="a" class="mr-2" id="q2_1_a"> a) Lista `[ ]`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="b" class="mr-2" id="q2_1_b"> b) Diccionario `{ }`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="c" class="mr-2" id="q2_1_c"> c) Tupla `( )`</label>
+                            </div>
+                             <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                             <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">
+                                <h6 class="font-semibold text-yellow-400">Repaso Necesario:</h6>
+                                <ul class="list-disc list-inside text-sm mt-2"></ul>
+                            </div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-pandas">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m1-pandas" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 3 -->
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">3. Pandas: El Organizador de Datos</h3>
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">3.1 ¿Qué es Pandas?</h4>
+                    <p class="mb-4">Pandas es una librería de Python que nos da una herramienta llamada <b class="text-blue-300">DataFrame</b>. Piensa en un DataFrame como una <b class="text-blue-300">hoja de Excel con superpoderes</b>, directamente en nuestro código. Es la herramienta esencial para cargar, limpiar y analizar datos.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">3.2 Lección Práctica: Cargar y Explorar Datos</h4>
+                    <p class="mb-2">Para esta lección, crea un archivo `municipios.csv` en tu computador (con el Bloc de Notas) y súbelo a Google Colab (aprenderemos cómo en la Misión 2).</p>
+                    <div class="code-block">nombre,poblacion,departamento,lat,lon
+Tunja,172548,Boyacá,5.53,-73.36
+Zipaquirá,130546,Cundinamarca,5.02,-74.00
+Duitama,113645,Boyacá,5.82,-73.03
+Sogamoso,111816,Boyacá,5.71,-72.93
+</div>
+                    <p class="my-2">Ahora, en Python (usando Pandas), cargaríamos y exploraríamos estos datos así:</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> pandas <span style="color: #ff7b72;">as</span> pd <span style="color: #79c0ff;"># 'as pd' es el apodo estándar para pandas</span>
+
+<span style="color: #79c0ff;"># 1. Cargar los datos desde el archivo CSV a un DataFrame</span>
+df = pd.read_csv(<span style="color: #a5d6ff;">'municipios.csv'</span>)
+
+<span style="color: #79c0ff;"># 2. Ver las primeras 5 filas para asegurarnos de que cargó bien</span>
+print(<span style="color: #a5d6ff;">"--- Visualización (head) ---"</span>)
+print(df.head())
+
+<span style="color: #79c0ff;"># 3. Ver un resumen técnico (tipos de datos, cuántos no-nulos)</span>
+print(<span style="color: #a5d6ff;">"--- Información (info) ---"</span>)
+print(df.info())
+
+<span style="color: #79c0ff;"># 4. Ver estadísticas básicas (promedio, mínimo, máximo) de las columnas numéricas</span>
+print(<span style="color: #a5d6ff;">"--- Descripción (describe) ---"</span>)
+print(df.describe())</div>
+                    <div class="bg-gray-800 p-3 rounded-lg mt-2 text-sm">
+                        <b>Tip de Explorador:</b> Los comandos `df.head()`, `df.info()` y `df.describe()` son *siempre* los primeros 3 comandos que ejecutas después de cargar datos. Te dicen el 90% de lo que necesitas saber sobre tu tabla.
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">3.3 Seleccionar y Filtrar Datos</h4>
+                    <p class="mb-2">Esto es increíblemente útil. Así es como "hacemos preguntas" a nuestros datos.</p>
+                    <div class="code-block"><span style="color: #79c0ff;"># Pregunta 1: ¿Cuáles son las poblaciones de todos los municipios?</span>
+<span style="color: #79c0ff;"># Seleccionamos una sola columna (esto es una "Serie" de Pandas)</span>
+poblaciones = df[<span style="color: #a5d6ff;">'poblacion'</span>]
+print(poblaciones)
+
+<span style="color: #79c0ff;"># Pregunta 2: ¿Cuáles son los municipios de Boyacá?</span>
+<span style="color: #79c0ff;"># Filtramos las filas usando una condición (esto se llama 'indexación booleana')</span>
+municipios_boyaca = df[df[<span style="color: #a5d6ff;">'departamento'</span>] == <span style="color: #a5d6ff;">'Boyacá'</span>]
+print(municipios_boyaca)
+
+<span style="color: #79c0ff;"># Pregunta 3 (Avanzada): ¿Cuáles son los municipios de Boyacá CON MÁS de 112,000 habitantes?</span>
+municipios_grandes_boyaca = df[
+    (df[<span style="color: #a5d6ff;">'departamento'</span>] == <span style="color: #a5d6ff;">'Boyacá'</span>) & <span style="color: #79c0ff;"># El & es 'Y'</span>
+    (df[<span style="color: #a5d6ff;">'poblacion'</span>] > <span style="color: #a5d6ff;">112000</span>)
+]
+print(municipios_grandes_boyaca)</div>
+                    
+                    <!-- Quiz Lección 3 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 3</h5>
+                        <form id="quiz-m1-pandas" class="quiz-form" data-next="#m1-visualizacion">
+                             <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">1. ¿Qué comando de Pandas usarías para ver las primeras filas de un DataFrame llamado `mi_tabla`?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="a" class="mr-2" id="q3_1_a"> a) `mi_tabla.info()`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="b" class="mr-2" id="q3_1_b"> b) `mi_tabla.head()`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="c" class="mr-2" id="q3_1_c"> c) `mi_tabla.describe()`</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                             <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">
+                                <h6 class="font-semibold text-yellow-400">Repaso Necesario:</h6>
+                                <ul class="list-disc list-inside text-sm mt-2"></ul>
+                            </div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-visualizacion">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+             <section id="m1-visualizacion" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 4 -->
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">4. Visualización: Un Dibujo Vale Más que Mil Números</h3>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">4.1 ¿Por qué Visualizar?</h4>
+                    <p class="mb-4">Tu cerebro es una máquina increíble de reconocimiento de patrones, pero es malo leyendo tablas. Es *excelente* viendo patrones en imágenes. La visualización de datos traduce números aburridos a imágenes que tu cerebro puede entender al instante.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.2 Matplotlib: El Pincel de Python</h4>
+                    <p class="mb-2">Matplotlib es la librería "madre" de todas las visualizaciones en Python. Todo lo demás se construye sobre ella. Usaremos `pyplot`, que es una parte de Matplotlib fácil de usar.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.3 Lección Práctica: Gráfico de Barras</h4>
+                    <p class="mb-2">Continuando con el ejemplo anterior, vamos a crear un gráfico de barras para comparar la población. Pandas tiene un atajo `.plot()` que usa Matplotlib por debajo.</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> matplotlib.pyplot <span style="color: #ff7b72;">as</span> plt
+
+<span style="color: #79c0ff;"># Usamos el DataFrame 'df' que ya teníamos</span>
+df.plot(kind=<span style="color: #a5d6ff;">'bar'</span>, x=<span style="color: #a5d6ff;">'nombre'</span>, y=<span style="color: #a5d6ff;">'poblacion'</span>, title=<span style="color: #a5d6ff;">'Población de Municipios'</span>)
+
+plt.ylabel(<span style="color: #a5d6ff;">'Habitantes'</span>) <span style="color: #79c0ff;"># Etiqueta para el eje Y</span>
+plt.xticks(rotation=<span style="color: #a5d6ff;">45</span>) <span style="color: #79c0ff;"># Rotamos los nombres para que no se superpongan</span>
+plt.tight_layout() <span style="color: #79c0ff;"># Ajusta el gráfico para que todo quepa</span>
+plt.show() <span style="color: #79c0ff;"># Mostrar el gráfico</span></div>
+                   
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.4 Lección Práctica: Gráfico de Dispersión (¡Nuestro Mapa!)</h4>
+                    <p class="mb-2"><b class="text-blue-300">Conexión al Proyecto:</b> Esta es la base de cómo visualizaremos nuestras rutas. Un gráfico de dispersión (scatter plot) simplemente pone un punto en una coordenada (X, Y). Si usamos la Longitud como X y la Latitud como Y... ¡tenemos un mapa!</p>
+                    <div class="code-block"><span style="color: #79c0ff;"># Usamos 'lon' (Longitud) para el eje X y 'lat' (Latitud) para el eje Y</span>
+plt.figure(figsize=(<span style="color: #a5d6ff;">8</span>, <span style="color: #a5d6ff;">6</span>)) <span style="color: #79c0ff;"># Opcional: define el tamaño del gráfico</span>
+plt.scatter(df[<span style="color: #a5d6ff;">'lon'</span>], df[<span style="color: #a5d6ff;">'lat'</span>])
+
+<span style="color: #79c0ff;"># Añadimos etiquetas a cada punto</span>
+<span style="color: #ff7b72;">for</span> i, row <span style="color: #ff7b72;">in</span> df.iterrows(): <span style="color: #79c0ff;"># 'iterrows' es un bucle especial de Pandas para filas</span>
+    plt.text(row[<span style="color: #a5d6ff;">'lon'</span>] + <span style="color: #a5d6ff;">0.01</span>, row[<span style="color: #a5d6ff;">'lat'</span>], row[<span style="color: #a5d6ff;">'nombre'</span>])
+
+plt.title(<span style="color: #a5d6ff;">'Mapa de Municipios'</span>)
+plt.xlabel(<span style="color: #a5d6ff;">'Longitud'</span>)
+plt.ylabel(<span style="color: #a5d6ff;">'Latitud'</span>)
+plt.grid(True) <span style="color: #79c0ff;"># Pone una cuadrícula</span>
+plt.show()</div>
+                     
+                     <!-- Quiz Lección 4 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 4</h5>
+                        <form id="quiz-m1-visualizacion" class="quiz-form" data-next="#m1-metodos-ia">
+                             <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">1. ¿Qué tipo de gráfico usarías para mostrar la ubicación de los municipios en un mapa usando latitud y longitud?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="a" class="mr-2" id="q4_1_a"> a) Gráfico de Barras</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="b" class="mr-2" id="q4_1_b"> b) Gráfico de Líneas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="c" class="mr-2" id="q4_1_c"> c) Gráfico de Dispersión (Scatter Plot)</label>
+                            </div>
+                             <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                             <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">
+                                <h6 class="font-semibold text-yellow-400">Repaso Necesario:</h6>
+                                <ul class="list-disc list-inside text-sm mt-2"></ul>
+                            </div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-metodos-ia">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m1-metodos-ia" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                    <!-- Contenido detallado Lección 5 -->
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">5. Métodos Básicos de IA: La Caja de Herramientas</h3>
+                    <p class="mb-4">IA es un término gigante. Vamos a conocer los 4 tipos de "herramientas" que menciona el pensum.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">5.1 Lógica Difusa (Fuzzy Logic)</h4>
+                    <p class="mb-2"><b>Concepto:</b> Es una lógica que va más allá del BLANCO/NEGRO (Verdadero/Falso, 0/1). Permite valores intermedios como "más o menos".</p>
+                    <p class="mb-2"><b>Analogía:</b> Piensa en el aire acondicionado. Una lógica normal diría: "SI temperatura > 25°C, ENCENDER". Una lógica difusa dice: "SI temperatura es 'tibia', ENCENDER_VENTILADOR_LENTO. SI temperatura es 'caliente', ENCENDER_VENTILADOR_FUERTE."</p>
+                    <p class="mb-2"><b>Uso:</b> Perfecto para sistemas de control (lavadoras, frenos ABS, aire acondicionado) donde las decisiones no son absolutas.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.2 Redes Neuronales</h4>
+                    <p class="mb-2"><b>Concepto:</b> Un modelo matemático inspirado en el cerebro humano. Consiste en "neuronas" digitales conectadas en capas, que "aprenden" ajustando la fuerza (peso) de sus conexiones.</p>
+                    <p class="mb-2"><b>Cómo aprende:</b> Le muestras miles de ejemplos (ej. fotos etiquetadas como "perro" o "gato"). La red intenta adivinar. Si se equivoca, ajusta sus conexiones internas (pesos) para corregir el error. Repite esto millones de veces hasta que se vuelve muy precisa.</p>
+                    <p class="mb-2"><b>Uso:</b> Reconocimiento de imágenes (¡esto es un gato!), traducción de idiomas, predicción de ventas, ChatGPT.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.3 Computación Bio-Inspirada</h4>
+                    <p class="mb-2"><b>Concepto:</b> Resolver problemas imitando las soluciones asombrosas de la naturaleza.</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Algoritmos Genéticos:</b> Imita la <b class="text-blue-300">evolución de Darwin</b>. Crea un grupo de "soluciones" (población), las evalúa (fitness), se queda con las mejores (selección), las combina (cruce) y añade cambios aleatorios (mutación).</li>
+                        <li><b>Optimización por Colonia de Hormigas (ACO):</b> Imita cómo las <b class="text-blue-300">hormigas encuentran el camino más corto</b>. Dejan un rastro de "feromona". Los caminos más cortos se refuerzan más rápido porque las hormigas van y vienen más veces, atrayendo a más hormigas.</li>
+                    </ul>
+                    <p class="mt-2 font-semibold text-blue-300"><b>¡Conexión al Proyecto!</b> Estos dos algoritmos son las herramientas perfectas para resolver nuestro "Problema del Vendedor Viajero". Los usaremos para "evolucionar" la mejor ruta o "encontrar" el mejor camino como las hormigas.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.4 Modelos Probabilísticos</h4>
+                    <p class="mb-2"><b>Concepto:</b> Un tipo de IA que toma decisiones basadas en la <b class="text-blue-300">probabilidad</b>. Utiliza estadísticas para predecir el resultado más probable.</p>
+                    <p class="mb-2"><b>Ejemplo Clásico:</b> Un filtro de spam. No sabe con certeza si un correo es spam. Pero calcula: "Basado en millones de correos que he visto, si un correo contiene las palabras 'oferta', 'gratis' y 'urgente', tiene un 95% de *probabilidad* de ser spam".</p>
+                    <p class="mb-2"><b>Uso:</b> Filtros de spam, diagnósticos médicos (probabilidad de enfermedad), sistemas de recomendación.</p>
+                    
+                    <!-- Evaluación Misión 1 -->
+                    <div id="quiz-mission-1-container" class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Misión 1</h5>
+                        <form id="quiz-mission-1" class="quiz-form space-y-6" data-next="#m2-colab" data-unlock-mission="#mission-2-details">
+                            <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">1. ¿Qué estructura de Python es INMODIFICABLE y se usa a menudo para coordenadas?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="a" class="mr-2" id="qM1_1_a"> a) Lista</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="b" class="mr-2" id="qM1_1_b"> b) Tupla</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="c" class="mr-2" id="qM1_1_c"> c) Diccionario</label>
+                            </div>
+                            <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">2. ¿Qué comando de Pandas usarías para filtrar un DataFrame `df` y quedarte solo con las filas donde la columna 'Edad' es mayor a 30?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="a" class="mr-2" id="qM1_2_a"> a) `df[df['Edad'] > 30]`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="b" class="mr-2" id="qM1_2_b"> b) `df.filter(Edad > 30)`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="c" class="mr-2" id="qM1_2_c"> c) `df.select('Edad > 30')`</label>
+                            </div>
+                            <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">3. ¿Qué librería de Python es fundamental para crear gráficos como el de dispersión (scatter plot)?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="a" class="mr-2" id="qM1_3_a"> a) Pandas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="b" class="mr-2" id="qM1_3_b"> b) Math</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="c" class="mr-2" id="qM1_3_c"> c) Matplotlib</label>
+                            </div>
+                            <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">4. ¿Qué tipo de algoritmo de IA imita la evolución de Darwin para encontrar soluciones?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="a" class="mr-2" id="qM1_4_a"> a) Redes Neuronales</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="b" class="mr-2" id="qM1_4_b"> b) Algoritmos Genéticos</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="c" class="mr-2" id="qM1_4_c"> c) Lógica Difusa</label>
+                            </div>
+                            <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">5. La palabra clave `def` en Python se usa para...</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="a" class="mr-2" id="qM1_5_a"> a) Definir una función.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="b" class="mr-2" id="qM1_5_b"> b) Crear una variable.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="c" class="mr-2" id="qM1_5_c"> c) Iniciar un bucle.</label>
+                            </div>
+                             <button type="submit" class="btn btn-primary verify-btn">Verificar Respuestas Misión 1</button>
+                             <div class="quiz-feedback hidden"></div>
+                              <div class="repaso-section hidden">
+                                <h6 class="font-semibold text-yellow-400">Repaso Necesario:</h6>
+                                <ul class="list-disc list-inside text-sm mt-2"></ul>
+                            </div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-colab">Comenzar Misión 2</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
 
              <!-- Misión 2 Sections -->
-             <section id="m2-colab" class="content-section hidden">...</section>
-             <section id="m2-practica-7" class="content-section hidden">...</section>
-             <section id="m2-practica-8" class="content-section hidden">...</section>
-             <section id="m2-practica-9" class="content-section hidden">...</section>
-             <section id="m2-practica-10" class="content-section hidden">...</section>
-             <section id="m2-practica-10-1" class="content-section hidden">...</section>
+            <section id="m2-colab" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">6. Tu Laboratorio: Google Colab</h3>
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">6.1 ¿Qué es Google Colab?</h4>
+                    <p class="mb-4">Google Colab es una herramienta GRATUITA que te permite escribir y ejecutar código Python directamente en tu navegador. No necesitas instalar nada. ¡Es como un cuaderno digital mágico donde tus ideas cobran vida!</p>
+                    <p class="mb-2">Funciona con "celdas". Hay dos tipos:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Celdas de Código:</b> Donde escribes y ejecutas tu código Python.</li>
+                        <li><b>Celdas de Texto:</b> Donde puedes escribir notas, poner títulos e ¡incluso añadir imágenes! (Como esta misma guía).</li>
+                    </ul>
+                    <a href="https://colab.research.google.com/" target="_blank" class="btn btn-primary mt-4">Abrir Google Colab</a>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">6.2 Lección Práctica: Tu Primer Cuaderno</h4>
+                    <details class="step-by-step"><summary><i class="fas fa-tasks mr-2"></i>Ver Guía Práctica Detallada</summary>
+                    <div class="details-content">
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>Ve a <a href="https://colab.research.google.com/" target="_blank" class="text-blue-400 hover:underline">colab.research.google.com</a>.</li>
+                            <li>Haz clic en <b class="text-blue-300">"Archivo" > "Nuevo cuaderno"</b>.</li>
+                            <li>Verás una "celda" de código. Escribe `print("¡Estoy listo!")` dentro.</li>
+                            <li>Presiona el <b class="text-blue-300">botón de "Play"</b> (un círculo con un triángulo) a la izquierda de la celda.</li>
+                            <li>¡Felicidades! Acabas de ejecutar tu primer programa en la nube.</li>
+                        </ol>
+                        <div class="bg-gray-800 p-3 rounded-lg mt-4 text-sm">
+                            <b>Tip de Explorador (¡El más importante!):</b> El atajo de teclado para ejecutar una celda y pasar a la siguiente es <b class="text-yellow-400">Shift + Enter</b>. ¡Te ahorrará horas de tiempo!
+                        </div>
+                    </div></details>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">6.3 Lección Práctica: Subir Archivos (¡Nuestro CSV!)</h4>
+                     <details class="step-by-step"><summary><i class="fas fa-upload mr-2"></i>Ver Guía Práctica Detallada</summary>
+                    <div class="details-content">
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>En la barra lateral izquierda de Colab, haz clic en el ícono de la <b class="text-blue-300">carpeta</b>.</li>
+                            <li>Verás un botón con un ícono de una hoja y una flecha hacia arriba (<b class="text-blue-300">"Subir"</b>).</li>
+                            <li>Haz clic en él y selecciona el archivo `municipios.csv` que creaste en la Misión 1.</li>
+                            <li>¡Listo! Ahora tu cuaderno de Colab puede "ver" y leer ese archivo.</li>
+                             <li class="text-yellow-400 font-semibold"><b>Importante:</b> Los archivos subidos de esta forma se borran cada vez que se reinicia tu sesión de Colab.</li>
+                        </ol>
+                    </div></details>
+                    
+                    <!-- Quiz Lección 6 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 6</h5>
+                        <form id="quiz-m2-colab" class="quiz-form" data-next="#m2-practica-7">
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">1. ¿Cuál es el atajo de teclado MÁS COMÚN para ejecutar una celda en Colab?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q6_1" value="a" class="mr-2" id="q6_1_a"> a) Shift + Enter</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q6_1" value="b" class="mr-2" id="q6_1_b"> b) Ctrl + S</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q6_1" value="c" class="mr-2" id="q6_1_c"> c) Alt + Tab</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-practica-7">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m2-practica-7" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">7. Práctica con Python en IA</h3>
+                     <p class="mb-4"><strong>Objetivo:</strong> Afianzar los conceptos básicos de Python resolviendo un pequeño problema de cálculo de distancias, fundamental para nuestro proyecto final.</p>
+                     
+                      <h4 class="text-xl font-semibold text-white mt-4 mb-2">7.1 Reto Práctico: Diccionario de Municipios</h4>
+                      <p class="mb-2">En Colab, crea una celda de código y escribe un <b class="text-blue-300">diccionario</b> llamado `municipios` que contenga 3 municipios de Boyacá o Cundinamarca (claves) y sus coordenadas (valores como tuplas).</p>
+                      <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Solución de Ejemplo</summary>
+                        <div class="code-block">
+<span style="color: #ff7b72;">municipios</span> = {
+    <span style="color: #a5d6ff;">"Tunja"</span>: (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>),
+    <span style="color: #a5d6ff;">"Duitama"</span>: (<span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">-73.03</span>),
+    <span style="color: #a5d6ff;">"Sogamoso"</span>: (<span style="color: #a5d6ff;">5.71</span>, <span style="color: #a5d6ff;">-72.93</span>)
+}
+print(<span style="color: #ff7b72;">municipios</span>[<span style="color: #a5d6ff;">"Duitama"</span>]) <span style="color: #79c0ff;"># Debería imprimir (5.82, -73.03)</span>
+                        </div>
+                      </details>
+                      
+                      <h4 class="text-xl font-semibold text-white mt-6 mb-2">7.2 Reto Práctico: La Función de Distancia</h4>
+                      <p class="mb-2"><b class="text-blue-300">Conexión al Proyecto:</b> Esta es la función más importante de nuestro proyecto. La usaremos para calcular la "aptitud" (fitness) de cada ruta. Una ruta con menor distancia total es "más apta".</p>
+                      <p class="mb-2">Copia, pega y ejecuta la función `calcular_distancia` que vimos en la Lección 2.5. Luego, úsala para calcular la distancia entre dos de tus municipios.</p>
+                      <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Solución de Ejemplo</summary>
+                        <div class="code-block">
+<span style="color: #ff7b72;">import</span> math
 
-             <!-- Misión 3 Sections -->
-             <section id="m3-proyectos" class="content-section hidden">...</section>
-             <section id="m3-co-creacion" class="content-section hidden">...</section>
-             <section id="proyecto-final" class="content-section hidden">...</section>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">calcular_distancia</span>(<span style="color: #79c0ff;">punto1, punto2</span>):
+    distancia_x = punto2[0] - punto1[0]
+    distancia_y = punto2[1] - punto1[1]
+    <span style="color: #79c0ff;"># Teorema de Pitágoras: a^2 + b^2 = c^2</span>
+    distancia = math.sqrt(distancia_x**2 + distancia_y**2)
+    <span style="color: #ff7b72;">return</span> distancia
+    
+<span style="color: #79c0ff;"># Obtenemos las coordenadas de nuestro diccionario</span>
+coords_tunja = <span style="color: #ff7b72;">municipios</span>[<span style="color: #a5d6ff;">"Tunja"</span>]
+coords_duitama = <span style="color: #ff7b72;">municipios</span>[<span style="color: #a5d6ff;">"Duitama"</span>]
 
+dist = <span style="color: #d2a8ff;">calcular_distancia</span>(coords_tunja, coords_duitama)
+print(f<span style="color: #a5d6ff;">"La distancia 'recta' entre Tunja y Duitama es: {dist}"</span>)
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg mt-2 text-sm">
+                            <b>Nota:</b> Esta es la distancia "euclidiana" (en línea recta, como un pájaro). No es la distancia real por carretera, pero para nuestro proyecto de optimización, ¡es un modelo excelente para empezar!
+                        </div>
+                      </details>
+                     
+                     <!-- Quiz Lección 7 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 7</h5>
+                        <form id="quiz-m2-practica-7" class="quiz-form" data-next="#m2-practica-8">
+                             <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">1. ¿Qué estructura de datos es ideal para almacenar la relación "Nombre de Municipio" -> (Latitud, Longitud)?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q7_1" value="a" class="mr-2" id="q7_1_a"> a) Una Lista de listas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q7_1" value="b" class="mr-2" id="q7_1_b"> b) Un Diccionario</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q7_1" value="c" class="mr-2" id="q7_1_c"> c) Una Tupla</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-practica-8">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m2-practica-8" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">8. Práctica con Pandas: Explorando Datos</h3>
+                     <p class="mb-4"><strong>Objetivo:</strong> Usar Pandas para cargar, explorar y filtrar datos de municipios desde un archivo CSV.</p>
+                     
+                     <h4 class="text-xl font-semibold text-white mt-4 mb-2">8.1 Reto Práctico: Cargar y Analizar</h4>
+                     <p class="mb-2">Asegúrate de haber subido tu archivo `municipios.csv` (de la Lección 3.2) a Colab.</p>
+                      <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Guía de Código</summary>
+                        <div class="code-block">
+<span style="color: #ff7b72;">import</span> pandas <span style="color: #ff7b72;">as</span> pd
+
+<span style="color: #79c0ff;"># 1. Cargar el archivo</span>
+df = pd.read_csv(<span style="color: #a5d6ff;">'municipios.csv'</span>)
+
+<span style="color: #79c0ff;"># 2. Explorar</span>
+print(<span style="color: #a5d6ff;">"--- PRIMERAS FILAS ---"</span>)
+print(df.head())
+
+print(<span style="color: #a5d6ff;">"--- INFORMACIÓN ---"</span>)
+df.info() <span style="color: #79c0ff;"># Ojo: .info() no necesita 'print' en Colab para mostrarse</span>
+                        </div>
+                      </details>
+                      
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">8.2 Reto Práctico: Filtrar y Ordenar</h4>
+                     <p class="mb-2"><b class="text-blue-300">Conexión al Proyecto:</b> Antes de ejecutar nuestros algoritmos, quizás queramos filtrar solo los municipios de "Boyacá" o solo los que tienen "más de 100,000 habitantes". Así se hace.</p>
+                      <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Guía de Código</summary>
+                        <div class="code-block">
+<span style="color: #79c0ff;"># 1. Filtrar solo municipios de Boyacá</span>
+municipios_boyaca = df[df[<span style="color: #a5d6ff;">'departamento'</span>] == <span style="color: #a5d6ff;">'Boyacá'</span>]
+print(<span style="color: #a5d6ff;">"--- SOLO BOYACÁ ---"</span>)
+print(municipios_boyaca)
+
+<span style="color: #79c0ff;"># 2. Ordenar por población (de mayor a menor)</span>
+df_ordenado = df.sort_values(by=<span style="color: #a5d6ff;">'poblacion'</span>, ascending=False)
+print(<span style="color: #a5d6ff;">"--- ORDENADO POR POBLACIÓN ---"</span>)
+print(df_ordenado)
+
+<span style="color: #79c0ff;"># 3. Crear una nueva columna</span>
+<span style="color: #79c0ff;"># Ej: una columna 'es_grande' que sea True si la población > 120000</span>
+df[<span style="color: #a5d6ff;">'es_grande'</span>] = df[<span style="color: #a5d6ff;">'poblacion'</span>] > <span style="color: #a5d6ff;">120000</span>
+print(<span style="color: #a5d6ff;">"--- CON NUEVA COLUMNA ---"</span>)
+print(df)
+                        </div>
+                      </details>
+                     
+                     <!-- Quiz Lección 8 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 8</h5>
+                        <form id="quiz-m2-practica-8" class="quiz-form" data-next="#m2-practica-9">
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">1. ¿Qué comando usarías para ordenar un DataFrame `df` por la columna 'nombre' alfabéticamente (A-Z)?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q8_1" value="a" class="mr-2" id="q8_1_a"> a) `df.sort_values(by='nombre')`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q8_1" value="b" class="mr-2" id="q8_1_b"> b) `df.sort('nombre', ascending=True)`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q8_1" value="c" class="mr-2" id="q8_1_c"> c) `df[df['nombre'].sort()]`</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-practica-9">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m2-practica-9" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">9. Práctica de IA (I): Redes Neuronales Simples</h3>
+                    <p class="mb-4"><strong>Objetivo:</strong> Entender conceptualmente cómo "aprende" una Red Neuronal usando la librería `Scikit-learn`, la más famosa para IA "tradicional" en Python.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">9.1 El Perceptrón: La Neurona Artificial Más Simple</h4>
+                    <p class="mb-2">Vamos a usar un modelo llamado <b class="text-blue-300">"Perceptrón"</b>. Es un tipo de red neuronal de una sola neurona. Le daremos dos datos de entrada (latitud y longitud) y le enseñaremos a decidir si el municipio pertenece a "Boyacá" (clase 0) o "Cundinamarca" (clase 1).</p>
+                    
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">9.2 Reto Práctico: Entrenar un Clasificador</h4>
+                     <p class="mb-2">¡Este es tu primer modelo de IA entrenado! No te preocupes si no entiendes cada línea, el objetivo es ver el *proceso*.</p>
+                     <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Guía de Código Completa</summary>
+                        <div class="code-block">
+<span style="color: #ff7b72;">from</span> sklearn.linear_model <span style="color: #ff7b72;">import</span> Perceptron
+<span style="color: #ff7b72;">import</span> pandas <span style="color: #ff7b72;">as</span> pd
+
+<span style="color: #79c0ff;"># 1. Datos de Entrenamiento (los ejemplos que le damos para aprender)</span>
+<span style="color: #79c0ff;"># Creamos un DataFrame simple</span>
+data = {
+    <span style="color: #a5d6ff;">'lat'</span>: [<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">5.71</span>, <span style="color: #a5d6ff;">5.02</span>, <span style="color: #a5d6ff;">5.14</span>],
+    <span style="color: #a5d6ff;">'lon'</span>: [<span style="color: #a5d6ff;">-73.36</span>, <span style="color: #a5d6ff;">-73.03</span>, <span style="color: #a5d6ff;">-72.93</span>, <span style="color: #a5d6ff;">-74.00</span>, <span style="color: #a5d6ff;">-73.68</span>],
+    <span style="color: #a5d6ff;">'depto_num'</span>: [<span style="color: #a5d6ff;">0</span>, <span style="color: #a5d6ff;">0</span>, <span style="color: #a5d6ff;">0</span>, <span style="color: #a5d6ff;">1</span>, <span style="color: #a5d6ff;">1</span>] <span style="color: #79c0ff;"># 0=Boyacá, 1=Cundinamarca</span>
+}
+df_entrenamiento = pd.DataFrame(data)
+
+<span style="color: #79c0ff;"># 2. Separar Entradas (X) y Salidas (y)</span>
+X = df_entrenamiento[[<span style="color: #a5d6ff;">'lat'</span>, <span style="color: #a5d6ff;">'lon'</span>]] <span style="color: #79c0ff;"># Las entradas (features)</span>
+y = df_entrenamiento[<span style="color: #a5d6ff;">'depto_num'</span>]  <span style="color: #79c0ff;"># La salida que queremos predecir (target)</span>
+
+<span style="color: #79c0ff;"># 3. Crear y Entrenar el Modelo</span>
+modelo = Perceptron() <span style="color: #79c0ff;"># Creamos la "neurona"</span>
+modelo.fit(X, y)      <span style="color: #79c0ff;"># ¡Aquí es donde "aprende" de los ejemplos!</span>
+
+print(<span style="color: #a5d6ff;">"¡Modelo entrenado!"</span>)
+
+<span style="color: #79c0ff;"># 4. Probar el modelo (Predecir)</span>
+<span style="color: #79c0ff;"># ¿Qué dirá de Paipa (Lat: 5.77, Lon: -73.11)? Debería ser 0 (Boyacá)</span>
+prediccion_paipa = modelo.predict([[<span style="color: #a5d6ff;">5.77</span>, <span style="color: #a5d6ff;">-73.11</span>]])
+print(f<span style="color: #a5d6ff;">"Predicción para Paipa: {prediccion_paipa}"</span>) <span style="color: #79c0ff;"># Imprimirá [0]</span>
+
+<span style="color: #79c0ff;"># ¿Qué dirá de Suesca (Lat: 5.10, Lon: -73.80)? Debería ser 1 (Cundinamarca)</span>
+prediccion_suesca = modelo.predict([[<span style="color: #a5d6ff;">5.10</span>, <span style="color: #a5d6ff;">-73.80</span>]])
+print(f<span style="color: #a5d6ff;">"Predicción para Suesca: {prediccion_suesca}"</span>) <span style="color: #79c0ff;"># Imprimirá [1]</span>
+                        </div>
+                     </details>
+                     
+                     <!-- Quiz Lección 9 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 9</h5>
+                        <form id="quiz-m2-practica-9" class="quiz-form" data-next="#m2-practica-10">
+                             <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">1. En nuestro ejemplo, ¿qué comando le "enseña" al modelo usando los datos `X` e `y`?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q9_1" value="a" class="mr-2" id="q9_1_a"> a) `modelo = Perceptron()`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q9_1" value="b" class="mr-2" id="q9_1_b"> b) `modelo.predict(X)`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q9_1" value="c" class="mr-2" id="q9_1_c"> c) `modelo.fit(X, y)`</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-practica-10">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m2-practica-10" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">10. Práctica: Algoritmo Simple "Vecino más Cercano"</h3>
+                    <p class="mb-4"><strong>Objetivo:</strong> Implementar nuestro primer algoritmo de optimización de rutas. Esta es la base del Algoritmo 1 para el proyecto final.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">10.1 La Lógica del Algoritmo "Voraz" (Greedy)</h4>
+                    <p class="mb-2">El algoritmo del "Vecino más Cercano" es "voraz" o "codicioso" (greedy) porque <b class="text-blue-300">siempre toma la mejor decisión *ahora mismo*</b>, sin pensar en el futuro. Su lógica es:</p>
+                    <ol class="list-decimal list-inside ml-4 mb-2">
+                        <li>Empieza en una ciudad (ej. "Tunja").</li>
+                        <li>Mira todas las ciudades que no has visitado.</li>
+                        <li>Viaja a la ciudad que esté <b class="text-blue-300">más cerca</b> de ti ahora.</li>
+                        <li>Repite los pasos 2 y 3 hasta que hayas visitado todas.</li>
+                        <li>Regresa a la ciudad de inicio.</li>
+                    </ol>
+                    <p class="mb-2">Es rápido y fácil de programar, pero casi nunca da la *mejor* ruta posible, aunque sí da una ruta "decente".</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">10.2 Reto Práctico: Implementar el Algoritmo</h4>
+                     <p class="mb-2"><b class="text-blue-300">Conexión al Proyecto:</b> Este será tu "Algoritmo 1". Es la base contra la que compararemos nuestro algoritmo bio-inspirado.</p>
+                     <details class="step-by-step"><summary><i class="fas fa-code mr-2"></i>Ver Guía de Código Completa</summary>
+                        <div class="code-block">
+<span style="color: #79c0ff;"># Necesitarás tu diccionario 'municipios' y tu función 'calcular_distancia' de la Lección 7</span>
+<span style="color: #79c0ff;"># (Asegúrate de que estén en celdas anteriores)</span>
+ciudades = list(<span style="color: #ff7b72;">municipios</span>.keys())
+ruta = []
+ciudades_restantes = ciudades[:] <span style="color: #79c0ff;"># Copiamos la lista</span>
+
+<span style="color: #79c0ff;"># 1. Empezamos en Tunja</span>
+ciudad_actual = <span style="color: #a5d6ff;">"Tunja"</span>
+ruta.append(ciudad_actual)
+ciudades_restantes.remove(ciudad_actual)
+
+<span style="color: #ff7b72;">while</span> ciudades_restantes: <span style="color: #79c0ff;"># Mientras queden ciudades por visitar...</span>
+    distancia_minima = float(<span style="color: #a5d6ff;">'inf'</span>) <span style="color: #79c0ff;"># Ponemos un infinito temporal</span>
+    ciudad_mas_cercana = None
+    
+    <span style="color: #79c0ff;"># 2. Busca la más cercana de las restantes</span>
+    <span style="color: #ff7b72;">for</span> ciudad <span style="color: #ff7b72;">in</span> ciudades_restantes:
+        dist = <span style="color: #d2a8ff;">calcular_distancia</span>(<span style="color: #ff7b72;">municipios</span>[ciudad_actual], <span style="color: #ff7b72;">municipios</span>[ciudad])
+        
+        <span style="color: #ff7b72;">if</span> dist < distancia_minima:
+            distancia_minima = dist
+            ciudad_mas_cercana = ciudad
+            
+    <span style="color: #79c0ff;"># 3. Viaja a esa ciudad</span>
+    ciudad_actual = ciudad_mas_cercana
+    ruta.append(ciudad_actual)
+    ciudades_restantes.remove(ciudad_actual)
+
+print(f<span style="color: #a5d6ff;">"Ruta del Vecino más Cercano: {ruta}"</span>)
+                        </div>
+                     </details>
+                     
+                     <!-- Quiz Lección 10 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 10</h5>
+                        <form id="quiz-m2-practica-10" class="quiz-form" data-next="#m2-practica-10-1">
+                             <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">1. ¿Cuál es la principal característica (y debilidad) de un algoritmo "voraz" (greedy)?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q10_1" value="a" class="mr-2" id="q10_1_a"> a) Siempre encuentra la mejor solución global.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q10_1" value="b" class="mr-2" id="q10_1_b"> b) Toma la mejor decisión local (ahora mismo) sin pensar en el futuro.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q10_1" value="c" class="mr-2" id="q10_1_c"> c) Imita a la naturaleza.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-practica-10-1">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m2-practica-10-1" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-flask mr-3 text-blue-400"></i>Misión 2: Experiencia</h2>
+                 <div class="card">
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">10.1 Práctica: Algoritmos Bioinspirados</h3>
+                    <p class="mb-4"><strong>Objetivo:</strong> Entender cómo funcionan los algoritmos más potentes que usarás en tu proyecto final, con ejemplos sencillos que puedes adaptar.</p>
+                
+                    <details class="step-by-step mb-4">
+                        <summary><i class="fas fa-dna mr-2"></i>Algoritmos Genéticos: La Evolución de las Rutas</summary>
+                        <div class="details-content">
+                            <h4 class="text-lg font-semibold text-white mb-2">La Idea con Lenguaje Sencillo</h4>
+                            <p class="mb-2">Imagina que quieres criar al perro más rápido. Tomas a tus dos perros más rápidos (los "padres") y los cruzas. Sus cachorros ("hijos") probablemente serán también muy rápidos. Si a veces nace un cachorro con una mutación rara que lo hace aún más rápido, ¡genial! Repites este proceso por muchas generaciones, siempre eligiendo a los más rápidos para ser padres. Al final, tendrás un perro súper veloz.</p>
+                            <p class="font-semibold text-blue-300 mt-4">Aplicación al Proyecto Final:</p>
+                            <ul class="list-disc list-inside space-y-2 mt-2">
+                                <li>Un <strong>"Individuo"</strong> o <strong>"Cromosoma"</strong> es una posible ruta (ej: ["Tunja", "Duitama", "Sogamoso", "Paipa"]).</li>
+                                <li>La <strong>"Aptitud" (Fitness)</strong> es qué tan buena es la ruta. Para nosotros, una ruta más corta (menor distancia total) tiene mayor aptitud.</li>
+                                <li>La <strong>"Población"</strong> es un montón de rutas diferentes (cientos o miles).</li>
+                                <li>El <strong>"Cruce" (Crossover)</strong> es tomar dos rutas "padre" y combinarlas para crear una nueva ruta "hijo".</li>
+                                <li>La <strong>"Mutación"</strong> es un cambio aleatorio pequeño en una ruta hijo (ej: intercambiar dos ciudades de lugar).</li>
+                            </ul>
+                            
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Código Conceptual (No ejecutar, solo leer)</h4>
+                            <div class="code-block">
+<span style="color: #79c0ff;"># 1. Crear una población inicial de 100 rutas aleatorias</span>
+poblacion = [crear_ruta_aleatoria() <span style="color: #ff7b72;">for</span> _ <span style="color: #ff7b72;">in</span> range(100)]
+
+<span style="color: #ff7b72;">for</span> generacion <span style="color: #ff7b72;">in</span> range(1000): <span style="color: #79c0ff;"># Repetir por 1000 generaciones</span>
+    <span style="color: #79c0ff;"># 2. Calcular la aptitud de cada ruta (distancia_total)</span>
+    poblacion_con_aptitud = calcular_aptitud_de_poblacion(poblacion)
+
+    <span style="color: #79c0ff;"># 3. Seleccionar los "mejores" padres (las rutas más cortas)</span>
+    padres = seleccionar_padres(poblacion_con_aptitud)
+
+    <span style="color: #79c0ff;"># 4. Crear nueva población con "hijos"</span>
+    nueva_poblacion = []
+    <span style="color: #ff7b72;">for</span> _ <span style="color: #ff7b72;">in</span> range(100):
+        padre1, padre2 = random.choice(padres), random.choice(padres)
+        hijo = cruzar(padre1, padre2) <span style="color: #79c0ff;"># 5. Cruzar</span>
+        hijo = mutar(hijo)            <span style="color: #79c0ff;"># 6. Mutar (a veces)</span>
+        nueva_poblacion.append(hijo)
+    
+    poblacion = nueva_poblacion
+
+<span style="color: #79c0ff;"># Al final, la mejor ruta en la 'poblacion' será una solución muy buena.</span>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="step-by-step">
+                        <summary><i class="fas fa-bug mr-2"></i>Colonia de Hormigas: La Sabiduría del Grupo</summary>
+                        <div class="details-content">
+                            <h4 class="text-lg font-semibold text-white mb-2">La Idea con Lenguaje Sencillo</h4>
+                            <p class="mb-2">Imagina hormigas buscando comida. Al principio, van por cualquier camino. Cuando una encuentra comida, regresa al nido dejando un rastro químico (feromona). Las hormigas que tomaron un camino más corto, irán y volverán más rápido, dejando más feromonas en menos tiempo. Pronto, las nuevas hormigas seguirán el camino con más feromonas, que resulta ser el más corto. ¡El trabajo en equipo las hace inteligentes!</p>
+                            <p class="font-semibold text-blue-300 mt-4">Aplicación al Proyecto Final:</p>
+                            <ul class="list-disc list-inside space-y-2 mt-2">
+                                <li>Una <strong>"Hormiga"</strong> es un agente que construye una ruta, una ciudad a la vez.</li>
+                                <li>La <strong>"Feromona"</strong> es un valor numérico en cada camino entre dos ciudades (ej: en el camino Tunja-Duitama). Más feromona significa que ese camino es parte de buenas rutas encontradas.</li>
+                                <li>Una hormiga en una ciudad elige a cuál ir después basándose en <strong>la distancia</strong> (prefiere caminos cortos) y <strong>la cantidad de feromona</strong> (prefiere caminos populares).</li>
+                                <li>Al final, las hormigas que construyeron las rutas más cortas <strong>depositan más feromona</strong> en los caminos que usaron, reforzándolos.</li>
+                                <li>La <strong>"Evaporación"</strong> hace que todas las feromonas disminuyan un poquito en cada paso, para olvidar malos caminos y permitir explorar nuevos.</li>
+                            </ul>
+                            
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Código Conceptual (No ejecutar, solo leer)</h4>
+                            <div class="code-block">
+<span style="color: #79c0ff;"># 1. Inicializar feromonas en todos los caminos con un valor bajo</span>
+feromonas = inicializar_feromonas(ciudades)
+
+<span style="color: #ff7b72;">for</span> iteracion <span style="color: #ff7b72;">in</span> range(100):
+    rutas_de_hormigas = []
+    <span style="color: #ff7b72;">for</span> hormiga <span style="color: #ff7b72;">in</span> range(50):
+        <span style="color: #79c0ff;"># 2. Cada hormiga construye una ruta basándose en distancia y feromonas</span>
+        ruta = construir_ruta_hormiga(feromonas, distancias)
+        rutas_de_hormigas.append(ruta)
+
+    <span style="color: #79c0ff;"># 3. Evaporar un poco todas las feromonas</span>
+    evaporar_feromonas(feromonas)
+
+    <span style="color: #79c0ff;"># 4. Las hormigas con las mejores rutas depositan nuevas feromonas</span>
+    actualizar_feromonas(feromonas, rutas_de_hormigas)
+
+<span style="color: #79c0ff;"># Después de muchas iteraciones, los caminos con más feromonas formarán la mejor ruta.</span>
+                            </div>
+                        </div>
+                    </details>
+                     
+                    <!-- Evaluación Misión 2 -->
+                    <div id="quiz-mission-2-container" class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Misión 2</h5>
+                        <p class="mb-4">¡Gran trabajo! Has completado la parte práctica. Demuestra lo que aprendiste para desbloquear la Misión Final.</p>
+                        <form id="quiz-mission-2" class="quiz-form space-y-6" data-next="#m3-proyectos" data-unlock-mission="#mission-3-details">
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">1. ¿Qué significa `Shift + Enter` en Google Colab?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="a" class="mr-2" id="qM2_1_a"> a) Ejecutar la celda actual y seleccionar la siguiente.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="b" class="mr-2" id="qM2_1_b"> b) Guardar el cuaderno.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="c" class="mr-2" id="qM2_1_c"> c) Crear una nueva celda de texto.</label>
+                            </div>
+                             <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">2. ¿Qué librería usamos para entrenar el Perceptrón (red neuronal simple) en la Lección 9?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="a" class="mr-2" id="qM2_2_a"> a) Pandas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="b" class="mr-2" id="qM2_2_b"> b) Matplotlib</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="c" class="mr-2" id="qM2_2_c"> c) Scikit-learn (sklearn)</label>
+                            </div>
+                            <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">3. El algoritmo del "Vecino más Cercano" es un ejemplo de algoritmo...</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="a" class="mr-2" id="qM2_3_a"> a) Genético</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="b" class="mr-2" id="qM2_3_b"> b) Voraz (Greedy)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="c" class="mr-2" id="qM2_3_c"> c) Basado en feromonas</label>
+                            </div>
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">4. ¿Qué representan la "feromona" en el algoritmo de Colonia de Hormigas aplicado al TSP?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="a" class="mr-2" id="qM2_4_a"> a) Un valor que indica qué tan bueno/popular es un camino entre dos ciudades.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="b" class="mr-2" id="qM2_4_b"> b) La distancia real entre dos ciudades.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="c" class="mr-2" id="qM2_4_c"> c) El número de hormigas que han pasado por ahí.</label>
+                            </div>
+                             <div class="mb-4 quiz-question" data-correct="c"><p class="mb-2 font-medium">5. ¿Qué paso del Algoritmo Genético introduce cambios aleatorios para explorar nuevas soluciones?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="a" class="mr-2" id="qM2_5_a"> a) Selección</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="b" class="mr-2" id="qM2_5_b"> b) Cruce (Crossover)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="c" class="mr-2" id="qM2_5_c"> c) Mutación</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar Respuestas Misión 2</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m3-proyectos">Comenzar Misión 3</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m3-proyectos" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-link mr-3 text-blue-400"></i>Misión 3: Conexión</h2>
+                 <div class="card">
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">1. De la Idea al Proyecto</h3>
+                     <h4 class="text-xl font-semibold text-white mt-4 mb-2">1.1 ¿Qué es la Gestión de Proyectos?</h4>
+                     <p class="mb-4">Es el mapa para no perdernos. Una buena idea no es suficiente; necesitamos un plan. La gestión de proyectos es el proceso de <b class="text-blue-300">planear, organizar y administrar</b> los recursos para alcanzar un objetivo específico.</p>
+                     
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.2 Pasos Clave de un Proyecto</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                         <li><b>Definición:</b> ¿Cuál es *exactamente* el problema? ¿Cuál es el *objetivo* medible?</li>
+                         <li><b>Planificación:</b> ¿Qué pasos hay que seguir? ¿Qué necesitamos (datos, herramientas)?</li>
+                         <li><b>Ejecución:</b> ¡Hacer el trabajo! (Escribir el código, analizar los datos).</li>
+                         <li><b>Monitoreo:</b> ¿Vamos bien? ¿Funciona como esperamos?</li>
+                         <li><b>Cierre:</b> Presentar los resultados y las conclusiones.</li>
+                     </ol>
+                     
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.3 Reto Práctico: Plantilla de Tu Proyecto</h4>
+                     <p class="mb-2">Tómate un minuto y responde estas preguntas en una celda de texto en Colab. Esta será la "definición" de tu proyecto final.</p>
+                     <div class="code-block" style="background-color: #1f2937; color: #d1d5db;">
+<strong>Nombre del Proyecto:</strong> Optimizador de Rutas Regional
+<br><br>
+<strong>1. Problema que Resuelve:</strong> El alto costo y tiempo en la distribución de productos (agrícolas, medicinas, etc.) en municipios de Boyacá/Cundinamarca.
+<br><br>
+<strong>2. Objetivo Principal (SMART):</strong> Desarrollar una herramienta en Google Colab que calcule y visualice la ruta más corta (TSP) para 10 municipios, comparando un algoritmo simple (Vecino Cercano) con uno avanzado (Genético o Hormigas).
+<br><br>
+<strong>3. Recursos Necesarios:</strong>
+<ul class="list-disc list-inside ml-4"><li>Datos: Lista de 10+ municipios con coordenadas (latitud, longitud).</li><li>Herramientas: Google Colab, Pandas, Matplotlib, Scikit-learn (o una librería de AG/ACO).</li></ul>
+<strong>4. Pasos Clave (Planificación):</strong>
+<ol class="list-decimal list-inside ml-4"><li>Obtener y limpiar los datos de los municipios.</li><li>Crear la función de cálculo de distancia.</li><li>Implementar el algoritmo del "vecino más cercano".</li><li>Implementar el algoritmo bioinspirado.</li><li>Visualizar ambas rutas en un mapa.</li><li>Comparar distancias totales y escribir conclusiones.</li></ol></div>
+                     
+                     <!-- Quiz Lección 1 M3 -->
+                      <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 1.3</h5>
+                        <form id="quiz-m3-proyectos" class="quiz-form" data-next="#m3-co-creacion">
+                             <div class="mb-4 quiz-question" data-correct="b"><p class="mb-2 font-medium">1. ¿Cuál es el primer paso crucial al iniciar un proyecto según lo visto?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="a" class="mr-2" id="qM3_1_1_a"> a) Escribir el código inmediatamente.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="b" class="mr-2" id="qM3_1_1_b"> b) Definir claramente el problema que se va a resolver.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="c" class="mr-2" id="qM3_1_1_c"> c) Elegir el algoritmo más avanzado.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m3-co-creacion">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+             <section id="m3-co-creacion" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-link mr-3 text-blue-400"></i>Misión 3: Conexión</h2>
+                 <div class="card">
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">2. Co-creación y Aplicación</h3>
+                     <h4 class="text-xl font-semibold text-white mt-4 mb-2">2.1 La IA es una Herramienta Transversal</h4>
+                     <p class="mb-4">Nuestro proyecto de rutas (TSP) no solo sirve para logística. La IA es una herramienta que puedes aplicar a <b class="text-blue-300">cualquier sector</b>. El poder está en tu creatividad para "traducir" un problema del mundo real a un problema que la IA pueda resolver.</p>
+                     
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.2 "Traduciendo" Problemas a IA</h4>
+                     <ul class="list-disc list-inside space-y-4">
+                         <li><b>Problema en el Agro:</b> "Un dron debe fumigar 15 árboles específicos en un campo."
+                            <br><b>Traducción a IA:</b> ¡Es un Problema del Vendedor Viajero (TSP)! Cada árbol es una "ciudad". Queremos la ruta más corta para el dron para ahorrar batería.</li>
+                         <li><b>Problema en Turismo:</b> "Un turista quiere visitar 5 lugares (Museo del Oro, Monserrate, La Candelaria, Plaza de Bolívar, Chorro de Quevedo) en el menor tiempo posible."
+                            <br><b>Traducción a IA:</b> ¡Otro TSP! Cada lugar es una "ciudad". Queremos la ruta a pie más corta.</li>
+                         <li><b>Problema en Salud:</b> "Una enfermera debe tomar muestras en 8 casas en un barrio."
+                            <br><b>Traducción a IA:</b> ¡Exacto! Un TSP. Cada casa es una "ciudad".</li>
+                         <li><b>Problema en Industria:</b> "Un brazo robótico debe soldar 50 puntos en una placa de circuito."
+                            <br><b>Traducción a IA:</b> ¡Un TSP! Cada punto de soldadura es una "ciudad". La ruta más corta ahorra milisegundos, que se convierten en horas en producción en masa.</li>
+                     </ul>
+                     
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.3 Tu Siguiente Paso</h4>
+                     <p class="mb-2">Lo que has aprendido aquí es la base. El siguiente nivel es explorar más herramientas:</p>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li><b>Redes Neuronales más Profundas (Deep Learning):</b> Para entender imágenes, texto y audio.</li>
+                        <li><b>Modelos de Lenguaje (LLMs):</b> El cerebro detrás de ChatGPT.</li>
+                        <li><b>Análisis de Datos Avanzado:</b> Para encontrar patrones ocultos en millones de datos.</li>
+                     </ul>
+                     <p class="mt-4 font-semibold">Has completado la formación teórica. ¡Es hora de construir tu proyecto!</p>
+                     
+                     <!-- Quiz Lección 2 M3 -->
+                      <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 2.4</h5>
+                        <form id="quiz-m3-co-creacion" class="quiz-form" data-next="#proyecto-final">
+                             <div class="mb-4 quiz-question" data-correct="a"><p class="mb-2 font-medium">1. El problema de optimizar la ruta de un brazo robótico para soldar puntos en un circuito es análogo a:</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="a" class="mr-2" id="qM3_2_1_a"> a) El Problema del Vendedor Viajero (TSP).</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="b" class="mr-2" id="qM3_2_1_b"> b) Clasificación de imágenes.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="c" class="mr-2" id="qM3_2_1_c"> c) Un filtro de spam.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary verify-btn">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                             <div class="repaso-section hidden">...</div>
+                            <button class="btn btn-warning retry-btn hidden mt-4">Volver a Intentar</button>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#proyecto-final">Ir al Proyecto Final</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+             <section id="proyecto-final" class="content-section hidden">
+                <div class="card border-2 border-blue-500 bg-blue-900/20"><h2 class="text-3xl font-bold text-white mb-4"><i class="fas fa-flag-checkered mr-3 text-blue-400"></i>Proyecto Final: El Optimizador de Rutas</h2><p class="text-lg text-gray-300 mb-6">¡Has llegado a la meta! Es hora de unir todas las piezas. Tu misión es construir una herramienta en Google Colab que calcule la ruta más corta para recorrer un conjunto de municipios de Cundinamarca o Boyacá.</p><h4 class="text-xl font-semibold text-white mt-6 mb-2">Guía Detallada del Proyecto:</h4><ol class="list-decimal list-inside space-y-3"><li><b>Recolección de Datos:</b> Busca en <a href="https://www.datos.gov.co/" target="_blank" class="text-blue-400 hover:underline">Datos Abiertos Colombia</a> un listado de municipios con sus coordenadas. Si no, ¡usa el diccionario que creamos en la Misión 2! (puedes añadirle 5 ciudades más).</li><li><b>Preparación:</b> Asegúrate de tener tu función `calcular_distancia` y tu diccionario de `municipios` listos.</li><li><b>Implementación de Algoritmos:</b><ul class="list-disc list-inside ml-6 my-2"><li><b>Algoritmo 1 (Simple):</b> Implementa el "Vecino más cercano" (Lección 10).</li><li><b>Algoritmo 2 (Avanzado):</b> Elige uno: Algoritmo Genético o Colonia de Hormigas (Lección 10.1). No tienes que programarlo de cero, ¡investiga librerías de Python!
+                            <br><small class="text-gray-400"><b>Tip:</b> Busca en Google "python library genetic algorithm tsp" (ej: `deap`) o "python library ant colony optimization tsp" (ej: `aco-tsp`).</small></li></ul></li><li><b>Visualización de Resultados:</b> Usa Matplotlib (Lección 4.4) para crear un gráfico de dispersión con las coordenadas de los municipios. Luego, dibuja líneas (`plt.plot()`) que conecten los puntos en el orden de la ruta encontrada por CADA algoritmo.</li><li><b>Conclusión:</b> Presenta tu cuaderno de Colab bien comentado. Incluye una celda de texto al final con:<ul class="list-disc list-inside ml-4"><li>La distancia total de la ruta para cada algoritmo.</li><li>Una comparación visual de las dos rutas en el mapa.</li><li>Una breve explicación de por qué el algoritmo avanzado encontró una mejor solución.</li></ul></li></ol><div class="mt-8 text-center"><button id="show-solution-btn" class="btn btn-primary text-lg">Ver Solución Propuesta</button></div></div>
+            </section>
             
         </div>
     </main>
     
-    <!-- Modal de Solución (Sin cambios) -->
+    <!-- Modal de Solución -->
     <div id="solution-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <!-- Contenido Modal -->
+        <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-full overflow-y-auto relative border border-blue-500">
+            <div class="p-4 border-b border-gray-700 sticky top-0 bg-gray-800 z-10">
+                <h3 class="text-2xl font-bold text-blue-300">Solución Propuesta del Proyecto Final</h3>
+                <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            <div class="p-6">
+                <p class="mb-4">Aquí tienes una implementación completa como referencia. ¡Compara tus resultados y aprende de las diferencias!</p>
+                
+                <h4 class="text-xl font-semibold text-white mt-4 mb-2">Paso 1: Configuración e Importación de Librerías</h4>
+                <div class="code-block">
+<span style="color: #ff7b72;">import</span> math                <span style="color: #79c0ff;"># Para cálculos matemáticos como la raíz cuadrada.</span>
+<span style="color: #ff7b72;">import</span> random              <span style="color: #79c0ff;"># Para generar números aleatorios, barajar listas, etc.</span>
+<span style="color: #ff7b72;">import</span> matplotlib.pyplot <span style="color: #ff7b72;">as</span> plt <span style="color: #79c0ff;"># La librería principal para crear gráficos y visualizaciones.</span>
+<span style="color: #79c0ff;"># Para el Algoritmo Genético, usaremos una librería simple 'deap'</span>
+<span style="color: #79c0ff;"># En Colab, la instalarías primero ejecutando en una celda: !pip install deap</span>
+<span style="color: #ff7b72;">from</span> deap <span style="color: #ff7b72;">import</span> base, creator, tools, algorithms
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mt-4 mb-2">Paso 2: Datos de Municipios y Funciones de Distancia</h4>
+                <div class="code-block">
+<span style="color: #79c0ff;"># Usamos un diccionario para nuestros datos.</span>
+municipios = {
+    'Tunja': (5.53, -73.36), 'Duitama': (5.82, -73.03),
+    'Sogamoso': (5.71, -72.93), 'Paipa': (5.77, -73.11),
+    'Villa de Leyva': (5.63, -73.52), 'Chiquinquirá': (5.51, -73.81),
+    'Zipaquirá': (5.02, -74.00), 'Chocontá': (5.14, -73.68),
+    'Guatavita': (4.93, -73.83), 'Suesca': (5.10, -73.80)
+}
+ciudades = list(municipios.keys())
+ciudades_coords = list(municipios.values())
+CIUDAD_INDICES = list(range(len(ciudades))) <span style="color: #79c0ff;"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+
+<span style="color: #79c0ff;"># --- Función para calcular la distancia euclidiana ---</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">calcular_distancia</span>(<span style="color: #79c0ff;">idx1, idx2</span>):
+    coord1 = ciudades_coords[idx1]
+    coord2 = ciudades_coords[idx2]
+    <span style="color: #ff7b72;">return</span> math.sqrt((coord1[0] - coord2[0])**2 + (coord1[1] - coord2[1])**2)
+
+<span style="color: #79c0ff;"># --- Función para calcular la distancia total de una ruta (un ciclo) ---</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">distancia_total_ruta</span>(<span style="color: #79c0ff;">ruta_indices</span>):
+    distancia = 0
+    <span style="color: #ff7b72;">for</span> i <span style="color: #ff7b72;">in</span> range(len(ruta_indices) - 1):
+        distancia += calcular_distancia(ruta_indices[i], ruta_indices[i+1])
+    distancia += calcular_distancia(ruta_indices[-1], ruta_indices[0]) <span style="color: #79c0ff;"># Volver al inicio</span>
+    <span style="color: #ff7b72;">return</span> (distancia,) <span style="color: #79c0ff;"># DEAP requiere que la aptitud sea una tupla</span>
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mt-4 mb-2">Paso 3: Algoritmo 1 - Vecino más Cercano</h4>
+                <div class="code-block">
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">vecino_mas_cercano</span>(<span style="color: #79c0ff;">inicio_idx</span>):
+    ruta_indices = [inicio_idx]
+    restantes = CIUDAD_INDICES[:]
+    restantes.remove(inicio_idx)
+    
+    ciudad_actual_idx = inicio_idx
+    <span style="color: #ff7b72;">while</span> restantes:
+        distancia_min = float('inf')
+        siguiente_ciudad_idx = None
+        
+        <span style="color: #ff7b72;">for</span> idx_candidata <span style="color: #ff7b72;">in</span> restantes:
+            dist = calcular_distancia(ciudad_actual_idx, idx_candidata)
+            <span style="color: #ff7b72;">if</span> dist < distancia_min:
+                distancia_min = dist
+                siguiente_ciudad_idx = idx_candidata
+                
+        ruta_indices.append(siguiente_ciudad_idx)
+        restantes.remove(siguiente_ciudad_idx)
+        ciudad_actual_idx = siguiente_ciudad_idx
+    <span style="color: #ff7b72;">return</span> ruta_indices
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mt-4 mb-2">Paso 4: Algoritmo 2 - Genético (Usando DEAP)</h4>
+                <div class="code-block">
+<span style="color: #79c0ff;"># --- Configuración del Algoritmo Genético ---</span>
+
+<span style="color: #79c0ff;"># 1. Definir el tipo de problema: Minimizar la distancia (peso negativo)</span>
+creator.create(<span style="color: #a5d6ff;">"FitnessMin"</span>, base.Fitness, weights=(<span style="color: #a5d6ff;">-1.0</span>,))
+<span style="color: #79c0ff;"># 2. Definir el "Individuo" (cromosoma): Será una lista de índices de ciudades</span>
+creator.create(<span style="color: #a5d6ff;">"Individual"</span>, list, fitness=creator.FitnessMin)
+
+toolbox = base.Toolbox()
+
+<span style="color: #79c0ff;"># 3. Función de Creación: Cómo crear un individuo (una ruta aleatoria)</span>
+toolbox.register(<span style="color: #a5d6ff;">"indices"</span>, random.sample, CIUDAD_INDICES, len(CIUDAD_INDICES))
+toolbox.register(<span style="color: #a5d6ff;">"individual"</span>, tools.initIterate, creator.Individual, toolbox.indices)
+<span style="color: #79c0ff;"># 4. Función de Población: Cómo crear la población inicial</span>
+toolbox.register(<span style="color: #a5d6ff;">"population"</span>, tools.initRepeat, list, toolbox.individual)
+
+<span style="color: #79c0ff;"># 5. Operadores Genéticos</span>
+toolbox.register(<span style="color: #a5d6ff;">"evaluate"</span>, distancia_total_ruta) <span style="color: #79c0ff;"># Función de aptitud</span>
+toolbox.register(<span style="color: #a5d6ff;">"mate"</span>, tools.cxOrdered)       <span style="color: #79c0ff;"># Cruce (Crossover)</span>
+toolbox.register(<span style="color: #a5d6ff;">"mutate"</span>, tools.mutShuffleIndexes, indpb=<span style="color: #a5d6ff;">0.05</span>) <span style="color: #79c0ff;"># Mutación (barajar 5% de genes)</span>
+toolbox.register(<span style="color: #a5d6ff;">"select"</span>, tools.selTournament, tournsize=<span style="color: #a5d6ff;">3</span>) <span style="color: #79c0ff;"># Selección (torneo)</span>
+
+<span style="color: #79c0ff;"># --- Ejecución del Algoritmo Genético ---</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">ejecutar_genetico</span>():
+    pop = toolbox.population(n=<span style="color: #a5d6ff;">300</span>) <span style="color: #79c0ff;"># Población de 300 individuos</span>
+    hof = tools.HallOfFame(1) <span style="color: #79c0ff;"># Guardar al mejor individuo (Salón de la Fama)</span>
+    
+    <span style="color: #79c0ff;"># Estadísticas para ver el progreso</span>
+    stats = tools.Statistics(key=<span style="color: #d2a8ff;">lambda</span> ind: ind.fitness.values)
+    stats.register(<span style="color: #a5d6ff;">"avg"</span>, np.mean)
+    stats.register(<span style="color: #a5d6ff;">"min"</span>, np.min)
+    
+    <span style="color: #79c0ff;"># Correr el algoritmo</span>
+    algorithms.eaSimple(pop, toolbox, cxpb=<span style="color: #a5d6ff;">0.7</span>, mutpb=<span style="color: #a5d6ff;">0.2</span>, ngen=<span style="color: #a5d6ff;">200</span>, 
+                        stats=stats, halloffame=hof, verbose=False)
+    
+    <span style="color: #ff7b72;">return</span> hof[0] <span style="color: #79c0ff;"># Devolver la mejor ruta encontrada</span>
+                </div>
+                
+                <h4 class="text-xl font-semibold text-white mt-4 mb-2">Paso 5: Ejecución y Visualización de Resultados</h4>
+                <div class="code-block">
+<span style="color: #79c0ff;"># --- Ejecución de los algoritmos ---</span>
+<span style="color: #79c0ff;"># (Asegúrate de importar 'numpy as np' para las estadísticas, o quita esa parte)</span>
+<span style="color: #ff7b72;">import</span> numpy <span style="color: #ff7b72;">as</span> np <span style="color: #79c0ff;"># Necesario para 'stats' en el AG</span>
+
+<span style="color: #79c0ff;"># Algoritmo 1</span>
+ruta_vecino_indices = vecino_mas_cercano(inicio_idx=0) <span style="color: #79c0ff;"># Empezar en Tunja (índice 0)</span>
+distancia_vecino = distancia_total_ruta(ruta_vecino_indices)[0]
+ruta_vecino_nombres = [ciudades[i] <span style="color: #ff7b72;">for</span> i <span style="color: #ff7b72;">in</span> ruta_vecino_indices]
+
+<span style="color: #79c0ff;"># Algoritmo 2</span>
+ruta_genetico_indices = ejecutar_genetico()
+distancia_genetico = distancia_total_ruta(ruta_genetico_indices)[0]
+ruta_genetico_nombres = [ciudades[i] <span style="color: #ff7b72;">for</span> i <span style="color: #ff7b72;">in</span> ruta_genetico_indices]
+
+
+<span style="color: #79c0ff;"># --- Impresión de resultados ---</span>
+print(<span style="color: #a5d6ff;">f"--- VECINO MÁS CERCANO ---"</span>)
+print(<span style="color: #a5d6ff;">f"Distancia Total: {distancia_vecino:.2f}"</span>)
+print(<span style="color: #a5d6ff;">f"Ruta: {ruta_vecino_nombres}"</span>)
+print(<span style="color: #a5d6ff;">f"--- ALGORITMO GENÉTICO ---"</span>)
+print(<span style="color: #a5d6ff;">f"Distancia Total: {distancia_genetico:.2f}"</span>)
+print(<span style="color: #a5d6ff;">f"Ruta: {ruta_genetico_nombres}"</span>)
+
+
+<span style="color: #79c0ff;"># --- Función para graficar una ruta ---</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">graficar_ruta</span>(<span style="color: #79c0ff;">ruta_indices, titulo</span>):
+    plt.figure(figsize=(<span style="color: #a5d6ff;">10</span>, <span style="color: #a5d6ff;">8</span>))
+    
+    <span style="color: #79c0ff;"># Obtener coords para la ruta</span>
+    x_ruta = [ciudades_coords[i][1] <span style="color: #ff7b72;">for</span> i <span style="color: #ff7b72;">in</span> ruta_indices]
+    y_ruta = [ciudades_coords[i][0] <span style="color: #ff7b72;">for</span> i <span style="color: #ff7b72;">in</span> ruta_indices]
+    
+    <span style="color: #79c0ff;"># Añadir el punto de inicio al final para cerrar el ciclo</span>
+    x_ruta.append(ciudades_coords[ruta_indices[0]][1])
+    y_ruta.append(ciudades_coords[ruta_indices[0]][0])
+    
+    plt.plot(x_ruta, y_ruta, 'o-') <span style="color: #79c0ff;"># 'o-' dibuja puntos y líneas.</span>
+    
+    <span style="color: #79c0ff;"># Poner etiquetas a todas las ciudades</span>
+    <span style="color: #ff7b72;">for</span> i, (lat, lon) <span style="color: #ff7b72;">in</span> enumerate(ciudades_coords):
+        plt.text(lon + <span style="color: #a5d6ff;">0.01</span>, lat + <span style="color: #a5d6ff;">0.01</span>, ciudades[i], fontsize=<span style="color: #a5d6ff;">9</span>)
+    
+    plt.title(titulo)
+    plt.xlabel(<span style="color: #a5d6ff;">"Longitud"</span>)
+    plt.ylabel(<span style="color: #a5d6ff;">"Latitud"</span>)
+    plt.grid(True)
+    plt.show()
+
+<span style="color: #79c0ff;"># --- Graficar ambas rutas ---</span>
+graficar_ruta(ruta_vecino_indices, f<span style="color: #a5d6ff;">'Vecino más Cercano - Distancia: {distancia_vecino:.2f}'</span>)
+graficar_ruta(ruta_genetico_indices, f<span style="color: #a5d6ff;">'Algoritmo Genético - Distancia: {distancia_genetico:.2f}'</span>)
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -445,9 +1515,8 @@
 
                  // Reset visual feedback
                  questions.forEach(qDiv => {
-                     //qDiv.classList.remove('border', 'border-red-500', 'border-green-500', 'rounded-lg', 'p-2'); // Remove border from question div itself
                      qDiv.querySelectorAll('.quiz-option').forEach(opt => {
-                         opt.classList.remove('selected-correct', 'selected-incorrect', 'actual-correct'); // Clear option styles
+                         opt.classList.remove('selected-correct', 'selected-incorrect');
                      });
                  });
 
@@ -475,7 +1544,7 @@
                  // Clear previous visual state from options only
                  questions.forEach(qDiv => {
                      qDiv.querySelectorAll('.quiz-option').forEach(opt => {
-                         opt.classList.remove('selected-correct', 'selected-incorrect', 'actual-correct');
+                         opt.classList.remove('selected-correct', 'selected-incorrect');
                      });
                  });
                  if(repasoList) repasoList.innerHTML = ''; // Clear repaso list
@@ -484,8 +1553,9 @@
                  questions.forEach((questionDiv, index) => {
                      const correctAnswerValue = questionDiv.dataset.correct;
                      const questionText = questionDiv.querySelector('p').textContent;
-                     const options = questionDiv.querySelectorAll('.quiz-option');
-                     const selectedRadio = form.querySelector(`input[name="${options[0].querySelector('input').name}"]:checked`); // Find based on name
+                     // Find the correct radio button group for this question
+                     const radioName = questionDiv.querySelector('input[type="radio"]').name;
+                     const selectedRadio = form.querySelector(`input[name="${radioName}"]:checked`);
 
 
                      if (selectedRadio) { // Check if an answer was selected
