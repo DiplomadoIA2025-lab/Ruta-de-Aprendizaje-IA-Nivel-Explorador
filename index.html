@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Inteligencia Artificial - Nivel Explorador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        .card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
+         .btn-secondary {
+            background-color: #4b5563;
+            color: white;
+        }
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #374151;
+            transform: scale(1.05);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .code-block {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        /* Sidebar Styles */
+        #sidebar {
+            width: 16rem; /* 256px */
+            transition: width 0.3s ease-in-out;
+        }
+        #sidebar.sidebar-collapsed {
+            width: 5rem; /* 80px */
+        }
+        .sidebar-collapsed .sidebar-text, .sidebar-collapsed .sidebar-title, .sidebar-collapsed .sidebar-subtitle {
+            display: none;
+        }
+        .sidebar-collapsed .nav-item {
+            justify-content: center;
+        }
+        .sidebar-collapsed details summary .fa-chevron-down {
+            display: none;
+        }
+        .active-link {
+            background-color: #2563eb;
+            color: white;
+        }
+        .nav-item.disabled {
+            color: #6b7280; /* Gray */
+            pointer-events: none;
+            cursor: default;
+        }
+        .nav-item.disabled i {
+             color: #4b5563;
+        }
+         .nav-item.disabled:hover {
+             background-color: transparent;
+         }
+         details.disabled summary {
+             color: #6b7280;
+             pointer-events: none;
+             cursor: default;
+         }
+         details.disabled summary i:first-child {
+              color: #4b5563;
+         }
+
+        /* Main Content Margin Control */
+        #main-content {
+            transition: margin-left 0.3s ease-in-out;
+        }
+         @media (min-width: 768px) {
+            #main-content {
+                margin-left: 16rem;
+            }
+            body.sidebar-is-collapsed #main-content {
+                margin-left: 5rem;
+            }
+        }
+        /* Details/Summary for Mission Accordion */
+        details summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-down {
+            transition: transform 0.2s;
+        }
+        details[open] summary .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        /* Quiz Styles */
+        .quiz-option:hover {
+            background-color: #374151;
+        }
+        .quiz-feedback {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .correct {
+            background-color: #166534;
+            color: #dcfce7;
+        }
+        .incorrect {
+            background-color: #991b1b;
+            color: #fee2e2;
+        }
+        /* Details for step-by-step */
+        details.step-by-step > summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #93c5fd;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #1e3a8a;
+        }
+        details.step-by-step > summary:hover {
+            background-color: #1d4ed8;
+        }
+        .details-content {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid #374151;
+        }
+        .quiz-container {
+            border-top: 1px solid #374151;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body class="">
+
+    <!-- Sidebar de Navegación -->
+    <aside id="sidebar" class="bg-gray-900 text-white min-h-screen p-4 fixed top-0 left-0 z-40 transform -translate-x-full md:translate-x-0 flex flex-col">
+        <div class="flex-grow overflow-y-auto">
+            <h2 class="sidebar-title text-2xl font-bold mb-1 text-blue-400">Ruta de Aprendizaje</h2>
+            <h3 class="sidebar-subtitle text-xs text-gray-400 mb-6">IA Nivel Explorador</h3>
+            <nav>
+                <ul class="space-y-2">
+                    <li><a href="#introduccion" id="link-introduccion" data-next="#modulo-cero" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item active-link"><i class="fas fa-rocket w-6 text-center mr-2"></i><span class="sidebar-text">Introducción</span></a></li>
+                    <li><a href="#modulo-cero" id="link-modulo-cero" data-quiz="#quiz-modulo-0" data-next="#m1-intro-ia" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-power-off w-6 text-center mr-2"></i><span class="sidebar-text">Módulo 0: Punto de Partida</span></a></li>
+                    <li>
+                        <details id="mission-1-details" class="sidebar-mission disabled" open>
+                            <summary class="flex items-center justify-between p-2 rounded hover:bg-gray-700 nav-item">
+                                <div class="flex items-center">
+                                    <i class="fas fa-dumbbell w-6 text-center mr-2"></i><span class="sidebar-text text-lg font-semibold text-blue-300">Misión 1</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-text text-xs text-gray-400"></i>
+                            </summary>
+                            <ul class="ml-4 space-y-2 text-sm mt-2">
+                                <li><a href="#m1-intro-ia" id="link-m1-intro-ia" data-quiz="#quiz-m1-intro-ia" data-next="#m1-python" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-brain w-6 text-center mr-2"></i><span class="sidebar-text">1. ¿Qué es la IA?</span></a></li>
+                                <li><a href="#m1-python" id="link-m1-python" data-quiz="#quiz-m1-python" data-next="#m1-pandas" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fab fa-python w-6 text-center mr-2"></i><span class="sidebar-text">2. Python desde Cero</span></a></li>
+                                <li><a href="#m1-pandas" id="link-m1-pandas" data-quiz="#quiz-m1-pandas" data-next="#m1-visualizacion" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-database w-6 text-center mr-2"></i><span class="sidebar-text">3. Manejo de Datos</span></a></li>
+                                <li><a href="#m1-visualizacion" id="link-m1-visualizacion" data-quiz="#quiz-m1-visualizacion" data-next="#m1-metodos-ia" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-chart-bar w-6 text-center mr-2"></i><span class="sidebar-text">4. Visualización de Datos</span></a></li>
+                                <li><a href="#m1-metodos-ia" id="link-m1-metodos-ia" data-quiz="#quiz-mission-1" data-next="#m2-colab" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-lightbulb w-6 text-center mr-2"></i><span class="sidebar-text">5. Métodos Básicos de IA</span></a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                         <details id="mission-2-details" class="sidebar-mission disabled">
+                            <summary class="flex items-center justify-between p-2 rounded hover:bg-gray-700 nav-item">
+                                <div class="flex items-center">
+                                    <i class="fas fa-flask w-6 text-center mr-2"></i><span class="sidebar-text text-lg font-semibold text-blue-300">Misión 2</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-text text-xs text-gray-400"></i>
+                            </summary>
+                            <ul class="ml-4 space-y-2 text-sm mt-2">
+                                <li><a href="#m2-colab" id="link-m2-colab" data-quiz="#quiz-m2-colab" data-next="#m2-practica-7" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-vial w-6 text-center mr-2"></i><span class="sidebar-text">6. Tu Laboratorio: Google Colab</span></a></li>
+                                <li><a href="#m2-practica-7" id="link-m2-practica-7" data-quiz="#quiz-m2-practica-7" data-next="#m2-practica-8" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-code w-6 text-center mr-2"></i><span class="sidebar-text">7. Práctica con Python</span></a></li>
+                                <li><a href="#m2-practica-8" id="link-m2-practica-8" data-quiz="#quiz-m2-practica-8" data-next="#m2-practica-9" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-table w-6 text-center mr-2"></i><span class="sidebar-text">8. Práctica con Pandas</span></a></li>
+                                <li><a href="#m2-practica-9" id="link-m2-practica-9" data-quiz="#quiz-m2-practica-9" data-next="#m2-practica-10" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-network-wired w-6 text-center mr-2"></i><span class="sidebar-text">9. Práctica de IA (I)</span></a></li>
+                                <li><a href="#m2-practica-10" id="link-m2-practica-10" data-quiz="#quiz-m2-practica-10" data-next="#m2-practica-10-1" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-route w-6 text-center mr-2"></i><span class="sidebar-text">10. Práctica: Algoritmo Simple</span></a></li>
+                                <li><a href="#m2-practica-10-1" id="link-m2-practica-10-1" data-quiz="#quiz-mission-2" data-next="#m3-proyectos" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-dna w-6 text-center mr-2"></i><span class="sidebar-text">10.1 Práctica: Algoritmos Avanzados</span></a></li>
+                            </ul>
+                        </details>
+                    </li>
+                     <li>
+                        <details id="mission-3-details" class="sidebar-mission disabled">
+                            <summary class="flex items-center justify-between p-2 rounded hover:bg-gray-700 nav-item">
+                                <div class="flex items-center">
+                                    <i class="fas fa-link w-6 text-center mr-2"></i><span class="sidebar-text text-lg font-semibold text-blue-300">Misión 3</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-text text-xs text-gray-400"></i>
+                            </summary>
+                            <ul class="ml-4 space-y-2 text-sm mt-2">
+                                <li><a href="#m3-proyectos" id="link-m3-proyectos" data-quiz="#quiz-m3-proyectos" data-next="#m3-co-creacion" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-project-diagram w-6 text-center mr-2"></i><span class="sidebar-text">1. De la Idea al Proyecto</span></a></li>
+                                <li><a href="#m3-co-creacion" id="link-m3-co-creacion" data-quiz="#quiz-m3-co-creacion" data-next="#proyecto-final" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-users w-6 text-center mr-2"></i><span class="sidebar-text">2. Co-creación y Aplicación</span></a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="#proyecto-final" id="link-proyecto-final" data-next="#final" class="flex items-center p-2 rounded hover:bg-gray-700 nav-item disabled"><i class="fas fa-flag-checkered w-6 text-center mr-2"></i><span class="sidebar-text">Proyecto Final</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mt-4 flex-shrink-0">
+            <button id="desktop-sidebar-toggle" class="hidden md:flex w-full items-center p-2 rounded hover:bg-gray-700 nav-item">
+                <i id="desktop-toggle-icon" class="fas fa-angle-double-left w-6 text-center mr-2"></i>
+                <span class="sidebar-text">Ocultar Menú</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Botón para mostrar/ocultar sidebar en móvil -->
+    <button id="mobile-sidebar-toggle" class="md:hidden fixed top-4 left-4 z-50 bg-gray-800 p-2 rounded-md text-white">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Contenido Principal -->
+    <main id="main-content" class="flex-1 p-6 md:p-10">
+        <div class="max-w-7xl mx-auto">
+            <section id="introduccion" class="content-section min-h-screen flex flex-col justify-center">
+                <div class="card text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Inteligencia Artificial: Nivel Explorador</h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-6">¡Bienvenido/a! Este es tu punto de partida en el fascinante mundo de la tecnología. No necesitas saber nada, te guiaremos desde cero para que puedas crear soluciones inteligentes.</p>
+                    
+                    <p class="text-md text-gray-400 my-8">Al final de este curso, desarrollarás un proyecto para optimizar rutas de logística en Cundinamarca y Boyacá, aplicando todo lo aprendido.</p>
+                    <button id="start-btn" class="btn btn-primary next-btn" data-next="#modulo-cero">¡Comenzar la Aventura!</button>
+                </div>
+            </section>
+    
+            <section id="modulo-cero" class="content-section hidden">
+                <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-power-off mr-3 text-blue-400"></i>Módulo 0: Punto de Partida - Fundamentos Digitales</h2>
+                <div class="card">
+                    <!-- Contenido detallado de Módulo 0 -->
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">Lección 0: ¡Hola, Mundo Digital!</h3>
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">0.1 ¿Qué es una computadora?</h4>
+                    <p class="mb-4">Imagina que una computadora es como una cocina súper avanzada.</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Procesador (CPU):</b> Es el <b class="text-blue-300">chef principal</b>. Es súper rápido pensando y dando órdenes (haciendo cálculos).</li>
+                        <li><b>Memoria (RAM):</b> Es la <b class="text-blue-300">mesa de trabajo</b> del chef. Aquí pone los ingredientes (datos) que está usando *ahora mismo*. Es muy rápida, pero se vacía cuando apagas el computador.</li>
+                        <li><b>Disco Duro (HDD/SSD):</b> Es la <b class="text-blue-300">despensa y el libro de recetas</b>. Aquí se guarda todo a largo plazo (tus archivos, fotos, el sistema operativo, los programas).</li>
+                        <li><b>Sistema Operativo (Windows, macOS):</b> Es el <b class="text-blue-300">gerente de la cocina</b>. Organiza al chef, gestiona la despensa y te permite "dar órdenes" usando el mouse y el teclado.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">0.2 El Pensamiento Lógico: La Receta del Éxito</h4>
+                    <p class="mb-4">Un <b class="text-blue-300">algoritmo</b> no es más que una receta: una serie de pasos ordenados, claros y finitos para lograr un objetivo. ¡No es nada más que eso!</p>
+                    <p class="mb-2"><b>Ejemplo de Algoritmo (Receta de Café):</b></p>
+                    <ol class="list-decimal list-inside ml-4 mb-4">
+                        <li>INICIO</li>
+                        <li>Tomar una taza.</li>
+                        <li>Añadir 1 cucharada de café.</li>
+                        <li>Añadir 200ml de agua caliente.</li>
+                        <li>Revolver por 10 segundos.</li>
+                        <li>FIN</li>
+                    </ol>
+                    <p>Programar es simplemente traducir estos algoritmos (recetas) a un idioma que la computadora (el chef-robot) pueda entender sin ninguna duda.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">0.3 Nuestras Herramientas Clave</h4>
+                    <p class="mb-2">No necesitas instalar nada complicado. Solo usaremos una herramienta:</p>
+                    <p><b class="text-blue-300">Google Colaboratory (Colab):</b> Es un "cuaderno" especial que se ejecuta en la nube (en los computadores de Google). Combina un editor de código, un ejecutor de código y un editor de texto en un solo lugar. Es la herramienta #1 para aprender ciencia de datos e IA, y es gratis. Empezaremos a usarla en la Misión 2.</p>
+                    
+                    <!-- Evaluación Módulo 0 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Módulo 0</h5>
+                        <form id="quiz-modulo-0" class="quiz-form space-y-6" data-next="#m1-intro-ia" data-unlock-mission="#mission-1-details">
+                            <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">1. ¿Qué componente de la computadora es como la "mesa de trabajo" donde se ponen los datos que se usan ahora mismo?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_1" value="a" class="mr-2"> a) Memoria (RAM)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_1" value="b" class="mr-2"> b) Procesador (CPU)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_1" value="c" class="mr-2"> c) Disco Duro</label>
+                            </div>
+                            <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">2. Un algoritmo es fundamentalmente...</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_2" value="a" class="mr-2"> a) Un programa de computadora complejo.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_2" value="b" class="mr-2"> b) Una serie de pasos ordenados para resolver un problema (como una receta).</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_2" value="c" class="mr-2"> c) Inteligencia Artificial.</label>
+                            </div>
+                             <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">3. ¿Cuál es la principal ventaja de Google Colab para este curso?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_3" value="a" class="mr-2"> a) Es el único programa que existe para IA.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_3" value="b" class="mr-2"> b) Funciona solo en computadores muy potentes.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_3" value="c" class="mr-2"> c) Permite escribir y ejecutar código Python en el navegador sin instalar nada.</label>
+                            </div>
+                             <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">4. El Sistema Operativo (Windows, macOS) se parece a...</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_4" value="a" class="mr-2"> a) El gerente de la cocina que organiza todo.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_4" value="b" class="mr-2"> b) El chef principal que hace los cálculos.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_4" value="c" class="mr-2"> c) La despensa donde se guarda todo.</label>
+                            </div>
+                             <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">5. ¿Cuál NO es una característica de un algoritmo?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_5" value="a" class="mr-2"> a) Pasos ordenados.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_5" value="b" class="mr-2"> b) Ser infinitamente largo.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q0_5" value="c" class="mr-2"> c) Ser claro y sin ambigüedades.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar Respuestas</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-intro-ia">Comenzar Misión 1</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="m1-intro-ia" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado de Lección 1 -->
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">1. ¿Qué es la Inteligencia Artificial?</h3>
+                     <h4 class="text-xl font-semibold text-white mt-4 mb-2">1.1 Definición de IA</h4>
+                     <p>La IA es una rama de la informática que busca crear máquinas capaces de <b class="text-blue-300">simular tareas que normalmente requieren inteligencia humana</b>. Estas tareas incluyen aprender, razonar, percibir, resolver problemas y tomar decisiones.</p>
+                     <p class="mt-2">No es magia, son matemáticas y lógica aplicadas de formas muy ingeniosas.</p>
+
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.2 IA Débil vs. IA Fuerte</h4>
+                     <ul class="list-disc list-inside space-y-2">
+                         <li><b>IA Débil (o Estrecha):</b> Es la que vemos todos los días. Está diseñada y entrenada para una <b class="text-blue-300">tarea específica</b>. No "piensa" por sí misma, solo es muy buena en lo que hace.
+                            <br><b>Ejemplos:</b> El GPS de tu celular, el recomendador de películas de Netflix, Siri o Alexa, los filtros de spam.</li>
+                         <li><b>IA Fuerte (o General):</b> Es la IA de las películas (como "Terminator" o "Her"). Sería una máquina con una inteligencia y conciencia similares a las humanas, capaz de aprender y realizar *cualquier* tarea intelectual. <b class="text-blue-300">Esta IA aún no existe</b> y es un tema de debate e investigación.</li>
+                     </ul>
+                     <p class="mt-2 font-semibold">En este curso, nos enfocaremos 100% en la IA Débil, la herramienta que está cambiando el mundo hoy.</p>
+
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-2">1.3 ¿Por qué nuestro proyecto es un problema de IA?</h4>
+                     <p>Nuestro proyecto es encontrar la "ruta más corta" para visitar varios municipios. Esto se conoce como el <b class="text-blue-300">"Problema del Vendedor Viajero" (TSP)</b>.</p>
+                     <p class="mt-2">Podrías pensar: "¿Por qué no probamos todas las rutas posibles y elegimos la más corta?"</p>
+                     <p class="mb-2"><b>Respuesta:</b> Porque la cantidad de rutas posibles crece ¡exponencialmente! </p>
+                     <ul class="list-disc list-inside space-y-2 bg-gray-800 p-4 rounded-lg">
+                         <li>Para 5 ciudades, hay 12 rutas posibles. (Fácil)</li>
+                         <li>Para 10 ciudades, hay 181,440 rutas posibles. (Manejable)</li>
+                         <li>Para 15 ciudades, hay 43,589,145,600 rutas. (Difícil)</li>
+                         <li>Para 20 ciudades, hay 60,828,186,403,426,755,864,360,960,000 rutas. (Imposible para cualquier computadora probarlas todas).</li>
+                     </ul>
+                     <p class="mt-2">Aquí es donde entra la IA: no podemos encontrar la solución *perfecta* probando todo, así que usamos algoritmos inteligentes (como los genéticos o los de hormigas) para encontrar una solución *extremadamente buena* en un tiempo razonable.</p>
+                     
+                     <!-- Quiz Lección 1 -->
+                     <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 1</h5>
+                        <form id="quiz-m1-intro-ia" class="quiz-form" data-next="#m1-python">
+                             <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">1. El GPS de tu celular es un ejemplo de:</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="a" class="mr-2"> a) IA Débil (o Estrecha)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="b" class="mr-2"> b) IA Fuerte (o General)</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q1_1" value="c" class="mr-2"> c) No es IA</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-python">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Resto de secciones con contenido detallado y quizzes -->
+            <section id="m1-python" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 2 -->
+                      <h3 class="text-2xl font-semibold text-blue-300 mb-3">2. Python: El Idioma de la IA</h3>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">2.1 ¿Por qué Python?</h4>
+                    <p class="mb-2">Python es el lenguaje de programación #1 para IA y Ciencia de Datos. ¿Por qué?</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Sintaxis Sencilla:</b> Es famoso por ser fácil de leer y escribir. Se parece mucho al inglés.</li>
+                        <li><b>Gran Comunidad:</b> Millones de personas lo usan, lo que significa que es fácil encontrar ayuda y tutoriales.</li>
+                        <li><b>Librerías Poderosas:</b> Tiene herramientas (librerías) ya construidas para casi todo, especialmente para IA (Pandas, Scikit-learn, TensorFlow, PyTorch).</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.2 Variables y Tipos de Datos</h4>
+                    <p class="mb-2">Una variable es una <b class="text-blue-300">caja con una etiqueta</b> donde guardamos información. Los tipos de datos principales que usaremos son:</p>
+                    <div class="code-block"><span style="color: #ff7b72;">nombre_municipio</span> = <span style="color: #a5d6ff;">"Tunja"</span>  
+<span style="color: #79c0ff;"># Tipo: Texto (string). Se usa para palabras y frases. Siempre va entre comillas.</span>
+
+<span style="color: #ff7b72;">poblacion</span> = <span style="color: #a5d6ff;">172548</span>      
+<span style="color: #79c0ff;"># Tipo: Número Entero (integer). Se usa para números sin decimales.</span>
+
+<span style="color: #ff7b72;">latitud</span> = <span style="color: #a5d6ff;">5.53</span>      
+<span style="color: #79c0ff;"># Tipo: Número Flotante (float). Se usa para números CON decimales.</span>
+
+<span style="color: #ff7b72;">es_capital</span> = <span style="color: #a5d6ff;">True</span>        
+<span style="color: #79c0ff;"># Tipo: Booleano (boolean). Solo puede ser True (Verdadero) o False (Falso).</span></div>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.3 Estructuras de Datos: Guardando Colecciones</h4>
+                    <p class="mb-2">A menudo necesitamos guardar *muchos* datos juntos. Para eso usamos estructuras:</p>
+                    <ul class="list-disc list-inside space-y-3">
+                        <li><b>Listas `[ ]`:</b> Una colección ordenada y <b class="text-blue-300">modificable</b>. Perfecta para nuestra ruta final.
+                            <div class="code-block"><span style="color: #ff7b72;">municipios_a_visitar</span> = [<span style="color: #a5d6ff;">"Villa de Leyva"</span>, <span style="color: #a5d6ff;">"Duitama"</span>, <span style="color: #a5d6ff;">"Sogamoso"</span>]
+<span style="color: #ff7b72;">municipios_a_visitar</span>.append(<span style="color: #a5d6ff;">"Paipa"</span>) <span style="color: #79c0ff;"># Añadimos un elemento al final</span>
+print(<span style="color: #ff7b72;">municipios_a_visitar</span>[0]) <span style="color: #79c0ff;"># Accedemos al primer elemento (la cuenta empieza en 0)</span></div>
+                        </li>
+                        <li><b>Tuplas `( )`:</b> Una colección ordenada e <b class="text-blue-300">INMODIFICABLE</b>. Una vez creada, no se puede cambiar. Perfecta para nuestras coordenadas.
+                            <div class="code-block"><span style="color: #ff7b72;">coordenadas_tunja</span> = (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>)
+<span style="color: #79c0ff;"># No podemos hacer coordenadas_tunja.append(...) ¡Esto da error y eso es bueno!</span>
+<span style="color: #79c0ff;"># Así nos aseguramos de no cambiar las coordenadas por accidente.</span></div>
+                        </li>
+                         <li><b>Diccionarios `{ }`:</b> La estructura más importante para nuestro proyecto. Guarda datos en pares <b class="text-blue-300">"clave: valor"</b>.
+                            <div class="code-block"><span style="color: #79c0ff;"># Relaciona el nombre de un municipio (clave) con sus coordenadas (valor)</span>
+<span style="color: #ff7b72;">municipios_coords</span> = {
+    <span style="color: #a5d6ff;">"Tunja"</span>: (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>),
+    <span style="color: #a5d6ff;">"Duitama"</span>: (<span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">-73.03</span>)
+}
+<span style="color: #79c0ff;"># Accedemos a los datos usando la clave (el nombre)</span>
+print(<span style="color: #ff7b72;">municipios_coords</span>[<span style="color: #a5d6ff;">"Tunja"</span>]) <span style="color: #79c0ff;"># Mostrará: (5.53, -73.36)</span></div>
+                        </li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.4 Estructuras de Control: Tomando Decisiones y Repitiendo Tareas</h4>
+                     <ul class="list-disc list-inside space-y-3">
+                        <li><b>Condicionales (`if`, `elif`, `else`):</b> Para que el programa tome decisiones.
+                            <div class="code-block"><span style="color: #ff7b72;">if</span> <span style="color: #ff7b72;">poblacion</span> > <span style="color: #a5d6ff;">100000</span>:
+    print(<span style="color: #a5d6ff;">"Es una ciudad grande"</span>)
+<span style="color: #ff7b72;">elif</span> <span style="color: #ff7b72;">poblacion</span> > <span style="color: #a5d6ff;">50000</span>:
+    print(<span style="color: #a5d6ff;">"Es una ciudad mediana"</span>)
+<span style="color: #ff7b72;">else</span>:
+    print(<span style="color: #a5d6ff;">"Es un municipio"</span>)</div>
+                        </li>
+                        <li><b>Bucles `for`:</b> Para repetir una acción por cada elemento en una colección.
+                            <div class="code-block"><span style="color: #79c0ff;"># Imprime cada municipio de nuestra lista</span>
+<span style="color: #ff7b72;">for</span> <span style="color: #ff7b72;">municipio</span> <span style="color: #ff7b72;">in</span> <span style="color: #ff7b72;">municipios_a_visitar</span>:
+    print(f<span style="color: #a5d6ff;">"Visitando ahora: {municipio}"</span>)</div>
+                        </li>
+                     </ul>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">2.5 Funciones (`def`): Creando Nuestras Propias Recetas</h4>
+                    <p class="mb-2">Una función es un bloque de código reutilizable al que le ponemos un nombre. ¡Es una "receta" dentro de nuestra receta principal! Esto es <b class="text-blue-300">fundamental</b> para organizar nuestro proyecto.</p>
+                    <p class="mb-2"><b>Conexión al Proyecto:</b> Crearemos una función para calcular la distancia entre dos puntos, y la usaremos miles de veces.</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> math <span style="color: #79c0ff;"># Importamos la librería de matemáticas</span>
+
+<span style="color: #79c0ff;"># Definimos la función. 'punto1' y 'punto2' son los "ingredientes" (parámetros)</span>
+<span style="color: #ff7b72;">def</span> <span style="color: #d2a8ff;">calcular_distancia</span>(<span style="color: #79c0ff;">punto1, punto2</span>):
+    distancia_x = punto2[0] - punto1[0]
+    distancia_y = punto2[1] - punto1[1]
+    distancia = math.sqrt(distancia_x**2 + distancia_y**2)
+    <span style="color: #ff7b72;">return</span> distancia <span style="color: #79c0ff;"># 'return' es el "plato terminado" que devuelve la función</span>
+
+<span style="color: #79c0ff;"># Ahora "llamamos" a la función para usarla</span>
+coords_tunja = (<span style="color: #a5d6ff;">5.53</span>, <span style="color: #a5d6ff;">-73.36</span>)
+coords_duitama = (<span style="color: #a5d6ff;">5.82</span>, <span style="color: #a5d6ff;">-73.03</span>)
+
+dist = <span style="color: #d2a8ff;">calcular_distancia</span>(coords_tunja, coords_duitama)
+print(f<span style="color: #a5d6ff;">"La distancia es: {dist}"</span>)</div>
+                    
+                     <!-- Quiz Lección 2 -->
+                     <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 2</h5>
+                        <form id="quiz-m1-python" class="quiz-form" data-next="#m1-pandas">
+                             <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">1. ¿Qué tipo de estructura usarías para guardar las coordenadas (latitud, longitud) de una ciudad si NO quieres que se modifiquen por accidente?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="a" class="mr-2"> a) Lista `[ ]`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="b" class="mr-2"> b) Diccionario `{ }`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q2_1" value="c" class="mr-2"> c) Tupla `( )`</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-pandas">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m1-pandas" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 3 -->
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">3. Pandas: El Organizador de Datos</h3>
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">3.1 ¿Qué es Pandas?</h4>
+                    <p class="mb-4">Pandas es una librería de Python que nos da una herramienta llamada <b class="text-blue-300">DataFrame</b>. Piensa en un DataFrame como una <b class="text-blue-300">hoja de Excel con superpoderes</b>, directamente en nuestro código. Es la herramienta esencial para cargar, limpiar y analizar datos.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">3.2 Lección Práctica: Cargar y Explorar Datos</h4>
+                    <p class="mb-2">Para esta lección, crea un archivo `municipios.csv` en tu computador (con el Bloc de Notas) y súbelo a Google Colab (aprenderemos cómo en la Misión 2).</p>
+                    <div class="code-block">nombre,poblacion,departamento,lat,lon
+Tunja,172548,Boyacá,5.53,-73.36
+Zipaquirá,130546,Cundinamarca,5.02,-74.00
+Duitama,113645,Boyacá,5.82,-73.03
+Sogamoso,111816,Boyacá,5.71,-72.93
+</div>
+                    <p class="my-2">Ahora, en Python (usando Pandas), cargaríamos y exploraríamos estos datos así:</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> pandas <span style="color: #ff7b72;">as</span> pd <span style="color: #79c0ff;"># 'as pd' es el apodo estándar para pandas</span>
+
+<span style="color: #79c0ff;"># 1. Cargar los datos desde el archivo CSV a un DataFrame</span>
+df = pd.read_csv(<span style="color: #a5d6ff;">'municipios.csv'</span>)
+
+<span style="color: #79c0ff;"># 2. Ver las primeras 5 filas para asegurarnos de que cargó bien</span>
+print(<span style="color: #a5d6ff;">"--- Visualización (head) ---"</span>)
+print(df.head())
+
+<span style="color: #79c0ff;"># 3. Ver un resumen técnico (tipos de datos, cuántos no-nulos)</span>
+print(<span style="color: #a5d6ff;">"--- Información (info) ---"</span>)
+print(df.info())
+
+<span style="color: #79c0ff;"># 4. Ver estadísticas básicas (promedio, mínimo, máximo) de las columnas numéricas</span>
+print(<span style="color: #a5d6ff;">"--- Descripción (describe) ---"</span>)
+print(df.describe())</div>
+                    <div class="bg-gray-800 p-3 rounded-lg mt-2 text-sm">
+                        <b>Tip de Explorador:</b> Los comandos `df.head()`, `df.info()` y `df.describe()` son *siempre* los primeros 3 comandos que ejecutas después de cargar datos. Te dicen el 90% de lo que necesitas saber sobre tu tabla.
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">3.3 Seleccionar y Filtrar Datos</h4>
+                    <p class="mb-2">Esto es increíblemente útil. Así es como "hacemos preguntas" a nuestros datos.</p>
+                    <div class="code-block"><span style="color: #79c0ff;"># Pregunta 1: ¿Cuáles son las poblaciones de todos los municipios?</span>
+<span style="color: #79c0ff;"># Seleccionamos una sola columna (esto es una "Serie" de Pandas)</span>
+poblaciones = df[<span style="color: #a5d6ff;">'poblacion'</span>]
+print(poblaciones)
+
+<span style="color: #79c0ff;"># Pregunta 2: ¿Cuáles son los municipios de Boyacá?</span>
+<span style="color: #79c0ff;"># Filtramos las filas usando una condición (esto se llama 'indexación booleana')</span>
+municipios_boyaca = df[df[<span style="color: #a5d6ff;">'departamento'</span>] == <span style="color: #a5d6ff;">'Boyacá'</span>]
+print(municipios_boyaca)
+
+<span style="color: #79c0ff;"># Pregunta 3 (Avanzada): ¿Cuáles son los municipios de Boyacá CON MÁS de 112,000 habitantes?</span>
+municipios_grandes_boyaca = df[
+    (df[<span style="color: #a5d6ff;">'departamento'</span>] == <span style="color: #a5d6ff;">'Boyacá'</span>) & <span style="color: #79c0ff;"># El & es 'Y'</span>
+    (df[<span style="color: #a5d6ff;">'poblacion'</span>] > <span style="color: #a5d6ff;">112000</span>)
+]
+print(municipios_grandes_boyaca)</div>
+                    
+                    <!-- Quiz Lección 3 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 3</h5>
+                        <form id="quiz-m1-pandas" class="quiz-form" data-next="#m1-visualizacion">
+                             <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">1. ¿Qué comando de Pandas usarías para ver las primeras filas de un DataFrame llamado `mi_tabla`?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="a" class="mr-2"> a) `mi_tabla.info()`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="b" class="mr-2"> b) `mi_tabla.head()`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q3_1" value="c" class="mr-2"> c) `mi_tabla.describe()`</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-visualizacion">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+             <section id="m1-visualizacion" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 4 -->
+                    <h3 class="text-2xl font-semibold text-blue-300 mb-3">4. Visualización: Un Dibujo Vale Más que Mil Números</h3>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">4.1 ¿Por qué Visualizar?</h4>
+                    <p class="mb-4">Tu cerebro es una máquina increíble de reconocimiento de patrones, pero es malo leyendo tablas. Es *excelente* viendo patrones en imágenes. La visualización de datos traduce números aburridos a imágenes que tu cerebro puede entender al instante.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.2 Matplotlib: El Pincel de Python</h4>
+                    <p class="mb-2">Matplotlib es la librería "madre" de todas las visualizaciones en Python. Todo lo demás se construye sobre ella. Usaremos `pyplot`, que es una parte de Matplotlib fácil de usar.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.3 Lección Práctica: Gráfico de Barras</h4>
+                    <p class="mb-2">Continuando con el ejemplo anterior, vamos a crear un gráfico de barras para comparar la población. Pandas tiene un atajo `.plot()` que usa Matplotlib por debajo.</p>
+                    <div class="code-block"><span style="color: #ff7b72;">import</span> matplotlib.pyplot <span style="color: #ff7b72;">as</span> plt
+
+<span style="color: #79c0ff;"># Usamos el DataFrame 'df' que ya teníamos</span>
+df.plot(kind=<span style="color: #a5d6ff;">'bar'</span>, x=<span style="color: #a5d6ff;">'nombre'</span>, y=<span style="color: #a5d6ff;">'poblacion'</span>, title=<span style="color: #a5d6ff;">'Población de Municipios'</span>)
+
+plt.ylabel(<span style="color: #a5d6ff;">'Habitantes'</span>) <span style="color: #79c0ff;"># Etiqueta para el eje Y</span>
+plt.xticks(rotation=<span style="color: #a5d6ff;">45</span>) <span style="color: #79c0ff;"># Rotamos los nombres para que no se superpongan</span>
+plt.tight_layout() <span style="color: #79c0ff;"># Ajusta el gráfico para que todo quepa</span>
+plt.show() <span style="color: #79c0ff;"># Mostrar el gráfico</span></div>
+                   
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">4.4 Lección Práctica: Gráfico de Dispersión (¡Nuestro Mapa!)</h4>
+                    <p class="mb-2"><b class="text-blue-300">Conexión al Proyecto:</b> Esta es la base de cómo visualizaremos nuestras rutas. Un gráfico de dispersión (scatter plot) simplemente pone un punto en una coordenada (X, Y). Si usamos la Longitud como X y la Latitud como Y... ¡tenemos un mapa!</p>
+                    <div class="code-block"><span style="color: #79c0ff;"># Usamos 'lon' (Longitud) para el eje X y 'lat' (Latitud) para el eje Y</span>
+plt.figure(figsize=(<span style="color: #a5d6ff;">8</span>, <span style="color: #a5d6ff;">6</span>)) <span style="color: #79c0ff;"># Opcional: define el tamaño del gráfico</span>
+plt.scatter(df[<span style="color: #a5d6ff;">'lon'</span>], df[<span style="color: #a5d6ff;">'lat'</span>])
+
+<span style="color: #79c0ff;"># Añadimos etiquetas a cada punto</span>
+<span style="color: #ff7b72;">for</span> i, row <span style="color: #ff7b72;">in</span> df.iterrows(): <span style="color: #79c0ff;"># 'iterrows' es un bucle especial de Pandas para filas</span>
+    plt.text(row[<span style="color: #a5d6ff;">'lon'</span>] + <span style="color: #a5d6ff;">0.01</span>, row[<span style="color: #a5d6ff;">'lat'</span>], row[<span style="color: #a5d6ff;">'nombre'</span>])
+
+plt.title(<span style="color: #a5d6ff;">'Mapa de Municipios'</span>)
+plt.xlabel(<span style="color: #a5d6ff;">'Longitud'</span>)
+plt.ylabel(<span style="color: #a5d6ff;">'Latitud'</span>)
+plt.grid(True) <span style="color: #79c0ff;"># Pone una cuadrícula</span>
+plt.show()</div>
+                     
+                     <!-- Quiz Lección 4 -->
+                    <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 4</h5>
+                        <form id="quiz-m1-visualizacion" class="quiz-form" data-next="#m1-metodos-ia">
+                             <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">1. ¿Qué tipo de gráfico usarías para mostrar la ubicación de los municipios en un mapa usando latitud y longitud?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="a" class="mr-2"> a) Gráfico de Barras</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="b" class="mr-2"> b) Gráfico de Líneas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="q4_1" value="c" class="mr-2"> c) Gráfico de Dispersión (Scatter Plot)</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m1-metodos-ia">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="m1-metodos-ia" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-dumbbell mr-3 text-blue-400"></i>Misión 1: Entrenamiento</h2>
+                 <div class="card">
+                    <!-- Contenido detallado Lección 5 -->
+                     <h3 class="text-2xl font-semibold text-blue-300 mb-3">5. Métodos Básicos de IA: La Caja de Herramientas</h3>
+                    <p class="mb-4">IA es un término gigante. Vamos a conocer los 4 tipos de "herramientas" que menciona el pensum.</p>
+                    
+                    <h4 class="text-xl font-semibold text-white mt-4 mb-2">5.1 Lógica Difusa (Fuzzy Logic)</h4>
+                    <p class="mb-2"><b>Concepto:</b> Es una lógica que va más allá del BLANCO/NEGRO (Verdadero/Falso, 0/1). Permite valores intermedios como "más o menos".</p>
+                    <p class="mb-2"><b>Analogía:</b> Piensa en el aire acondicionado. Una lógica normal diría: "SI temperatura > 25°C, ENCENDER". Una lógica difusa dice: "SI temperatura es 'tibia', ENCENDER_VENTILADOR_LENTO. SI temperatura es 'caliente', ENCENDER_VENTILADOR_FUERTE."</p>
+                    <p class="mb-2"><b>Uso:</b> Perfecto para sistemas de control (lavadoras, frenos ABS, aire acondicionado) donde las decisiones no son absolutas.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.2 Redes Neuronales</h4>
+                    <p class="mb-2"><b>Concepto:</b> Un modelo matemático inspirado en el cerebro humano. Consiste en "neuronas" digitales conectadas en capas, que "aprenden" ajustando la fuerza (peso) de sus conexiones.</p>
+                    <p class="mb-2"><b>Cómo aprende:</b> Le muestras miles de ejemplos (ej. fotos etiquetadas como "perro" o "gato"). La red intenta adivinar. Si se equivoca, ajusta sus conexiones internas (pesos) para corregir el error. Repite esto millones de veces hasta que se vuelve muy precisa.</p>
+                    <p class="mb-2"><b>Uso:</b> Reconocimiento de imágenes (¡esto es un gato!), traducción de idiomas, predicción de ventas, ChatGPT.</p>
+                    
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.3 Computación Bio-Inspirada</h4>
+                    <p class="mb-2"><b>Concepto:</b> Resolver problemas imitando las soluciones asombrosas de la naturaleza.</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Algoritmos Genéticos:</b> Imita la <b class="text-blue-300">evolución de Darwin</b>. Crea un grupo de "soluciones" (población), las evalúa (fitness), se queda con las mejores (selección), las combina (cruce) y añade cambios aleatorios (mutación).</li>
+                        <li><b>Optimización por Colonia de Hormigas (ACO):</b> Imita cómo las <b class="text-blue-300">hormigas encuentran el camino más corto</b>. Dejan un rastro de "feromona". Los caminos más cortos se refuerzan más rápido porque las hormigas van y vienen más veces, atrayendo a más hormigas.</li>
+                    </ul>
+                    <p class="mt-2 font-semibold text-blue-300"><b>¡Conexión al Proyecto!</b> Estos dos algoritmos son las herramientas perfectas para resolver nuestro "Problema del Vendedor Viajero". Los usaremos para "evolucionar" la mejor ruta o "encontrar" el mejor camino como las hormigas.</p>
+
+                    <h4 class="text-xl font-semibold text-white mt-6 mb-2">5.4 Modelos Probabilísticos</h4>
+                    <p class="mb-2"><b>Concepto:</b> Un tipo de IA que toma decisiones basadas en la <b class="text-blue-300">probabilidad</b>. Utiliza estadísticas para predecir el resultado más probable.</p>
+                    <p class="mb-2"><b>Ejemplo Clásico:</b> Un filtro de spam. No sabe con certeza si un correo es spam. Pero calcula: "Basado en millones de correos que he visto, si un correo contiene las palabras 'oferta', 'gratis' y 'urgente', tiene un 95% de *probabilidad* de ser spam".</p>
+                    <p class="mb-2"><b>Uso:</b> Filtros de spam, diagnósticos médicos (probabilidad de enfermedad), sistemas de recomendación.</p>
+                    
+                    <!-- Evaluación Misión 1 -->
+                    <div id="quiz-mission-1-container" class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Misión 1</h5>
+                        <form id="quiz-mission-1" class="quiz-form space-y-6" data-next="#m2-colab" data-unlock-mission="#mission-2-details">
+                            <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">1. ¿Qué estructura de Python es INMODIFICABLE y se usa a menudo para coordenadas?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="a" class="mr-2"> a) Lista</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="b" class="mr-2"> b) Tupla</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_1" value="c" class="mr-2"> c) Diccionario</label>
+                            </div>
+                            <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">2. ¿Qué comando de Pandas usarías para filtrar un DataFrame `df` y quedarte solo con las filas donde la columna 'Edad' es mayor a 30?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="a" class="mr-2"> a) `df[df['Edad'] > 30]`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="b" class="mr-2"> b) `df.filter(Edad > 30)`</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_2" value="c" class="mr-2"> c) `df.select('Edad > 30')`</label>
+                            </div>
+                            <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">3. ¿Qué librería de Python es fundamental para crear gráficos como el de dispersión (scatter plot)?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="a" class="mr-2"> a) Pandas</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="b" class="mr-2"> b) Math</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_3" value="c" class="mr-2"> c) Matplotlib</label>
+                            </div>
+                            <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">4. ¿Qué tipo de algoritmo de IA imita la evolución de Darwin para encontrar soluciones?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="a" class="mr-2"> a) Redes Neuronales</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="b" class="mr-2"> b) Algoritmos Genéticos</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_4" value="c" class="mr-2"> c) Lógica Difusa</label>
+                            </div>
+                            <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">5. La palabra clave `def` en Python se usa para...</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="a" class="mr-2"> a) Definir una función.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="b" class="mr-2"> b) Crear una variable.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM1_5" value="c" class="mr-2"> c) Iniciar un bucle.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar Respuestas Misión 1</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m2-colab">Comenzar Misión 2</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+            
+            <!-- Resto de Misiones y Proyecto Final con contenido detallado y quizzes -->
+            <section id="m2-colab" class="content-section hidden">...</section>
+            <section id="m2-practica-7" class="content-section hidden">...</section>
+            <section id="m2-practica-8" class="content-section hidden">...</section>
+            <section id="m2-practica-9" class="content-section hidden">...</section>
+            <section id="m2-practica-10" class="content-section hidden">...</section>
+            <section id="m2-practica-10-1" class="content-section hidden">
+                <!-- Contenido detallado Lección 10.1 -->
+                <!-- Evaluación Misión 2 -->
+                <div id="quiz-mission-2-container" class="quiz-container">
+                    <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Misión 2</h5>
+                    <form id="quiz-mission-2" class="quiz-form space-y-6" data-next="#m3-proyectos" data-unlock-mission="#mission-3-details">
+                         <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">1. ¿Qué significa `Shift + Enter` en Google Colab?</p>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="a" class="mr-2"> a) Ejecutar la celda actual y seleccionar la siguiente.</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="b" class="mr-2"> b) Guardar el cuaderno.</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_1" value="c" class="mr-2"> c) Crear una nueva celda de texto.</label>
+                        </div>
+                         <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">2. ¿Qué librería usamos para entrenar el Perceptrón (red neuronal simple)?</p>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="a" class="mr-2"> a) Pandas</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="b" class="mr-2"> b) Matplotlib</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_2" value="c" class="mr-2"> c) Scikit-learn (sklearn)</label>
+                        </div>
+                        <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">3. El algoritmo del "Vecino más Cercano" es un ejemplo de algoritmo...</p>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="a" class="mr-2"> a) Genético</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="b" class="mr-2"> b) Voraz (Greedy)</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_3" value="c" class="mr-2"> c) Basado en feromonas</label>
+                        </div>
+                         <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">4. ¿Qué representan la "feromona" en el algoritmo de Colonia de Hormigas aplicado al TSP?</p>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="a" class="mr-2"> a) Un valor que indica qué tan bueno/popular es un camino entre dos ciudades.</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="b" class="mr-2"> b) La distancia real entre dos ciudades.</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_4" value="c" class="mr-2"> c) El número de hormigas que han pasado por ahí.</label>
+                        </div>
+                         <div class="mb-4" data-correct="c"><p class="mb-2 font-medium">5. ¿Qué paso del Algoritmo Genético introduce cambios aleatorios para explorar nuevas soluciones?</p>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="a" class="mr-2"> a) Selección</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="b" class="mr-2"> b) Cruce (Crossover)</label>
+                            <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM2_5" value="c" class="mr-2"> c) Mutación</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Verificar Respuestas Misión 2</button>
+                        <div class="quiz-feedback hidden"></div>
+                        <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m3-proyectos">Comenzar Misión 3</button>
+                    </form>
+                </div>
+            </section>
+            
+            <section id="m3-proyectos" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-link mr-3 text-blue-400"></i>Misión 3: Conexión</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 1 M3 -->
+                     <!-- Quiz Lección 1 M3 -->
+                      <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 1.3</h5>
+                        <form id="quiz-m3-proyectos" class="quiz-form" data-next="#m3-co-creacion">
+                             <div class="mb-4" data-correct="b"><p class="mb-2 font-medium">1. ¿Cuál es el primer paso crucial al iniciar un proyecto según lo visto?</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="a" class="mr-2"> a) Escribir el código inmediatamente.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="b" class="mr-2"> b) Definir claramente el problema que se va a resolver.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_1_1" value="c" class="mr-2"> c) Elegir el algoritmo más avanzado.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#m3-co-creacion">Siguiente Lección</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+             <section id="m3-co-creacion" class="content-section hidden">
+                 <h2 class="text-3xl font-bold text-white mb-6"><i class="fas fa-link mr-3 text-blue-400"></i>Misión 3: Conexión</h2>
+                 <div class="card">
+                     <!-- Contenido detallado Lección 2 M3 -->
+                     <!-- Quiz Lección 2 M3 -->
+                      <div class="quiz-container">
+                        <h5 class="font-bold text-lg mb-4 text-blue-300">Evaluación Lección 2.4</h5>
+                        <form id="quiz-m3-co-creacion" class="quiz-form" data-next="#proyecto-final">
+                             <div class="mb-4" data-correct="a"><p class="mb-2 font-medium">1. El problema de optimizar la ruta de un brazo robótico para soldar puntos en un circuito es análogo a:</p>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="a" class="mr-2"> a) El Problema del Vendedor Viajero (TSP).</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="b" class="mr-2"> b) Clasificación de imágenes.</label>
+                                <label class="block cursor-pointer p-3 rounded-lg quiz-option"><input type="radio" name="qM3_2_1" value="c" class="mr-2"> c) Un filtro de spam.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Verificar</button>
+                            <div class="quiz-feedback hidden"></div>
+                            <button class="btn btn-secondary next-btn hidden mt-4" data-next="#proyecto-final">Ir al Proyecto Final</button>
+                        </form>
+                    </div>
+                 </div>
+            </section>
+             <section id="proyecto-final" class="content-section hidden">...</section>
+            
+        </div>
+    </main>
+    
+    <!-- Modal de Solución (Sin cambios) -->
+    <div id="solution-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        ...
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const body = document.body;
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const mobileToggle = document.getElementById('mobile-sidebar-toggle');
+            const desktopToggle = document.getElementById('desktop-sidebar-toggle');
+            const desktopToggleIcon = document.getElementById('desktop-toggle-icon');
+            const allSidebarLinks = document.querySelectorAll('#sidebar a.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            const missionDetails = document.querySelectorAll('.sidebar-mission');
+            const nextButtons = document.querySelectorAll('.next-btn');
+
+            // --- State Management ---
+            let activeSectionId = 'introduccion';
+
+            // --- Core Functions ---
+            function showContent(targetId) {
+                contentSections.forEach(section => section.classList.add('hidden'));
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    activeSectionId = targetId;
+                    // Update active link in sidebar
+                    allSidebarLinks.forEach(l => l.classList.remove('active-link'));
+                    const activeLink = document.querySelector(`#sidebar a[href="#${targetId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active-link');
+                    }
+                     window.scrollTo(0, 0); // Scroll to top when changing sections
+                }
+            }
+
+            function unlockLink(linkSelector) {
+                const link = document.querySelector(linkSelector);
+                if (link) {
+                    link.classList.remove('disabled');
+                }
+            }
+
+            function unlockMission(missionSelector) {
+                 const mission = document.querySelector(missionSelector);
+                 if(mission) {
+                     mission.classList.remove('disabled');
+                     // Optionally open the details
+                     // mission.open = true;
+                 }
+            }
+
+             function handleQuizSubmission(form) {
+                 const questions = form.querySelectorAll('div[data-correct]');
+                 let allCorrect = true;
+                 let firstIncorrectFeedback = null;
+
+                 questions.forEach((questionDiv, index) => {
+                     const correctAnswer = questionDiv.getAttribute('data-correct');
+                     const selectedAnswer = form.querySelector(`input[name="q${form.id.split('-')[1]}_${index+1}"]:checked`); // Adjust name pattern if needed
+                     const feedbackDiv = form.querySelector('.quiz-feedback'); // One feedback for the whole form
+
+                     if (!selectedAnswer || selectedAnswer.value !== correctAnswer) {
+                         allCorrect = false;
+                         if (!firstIncorrectFeedback) { // Show general incorrect message
+                              feedbackDiv.textContent = 'Algunas respuestas son incorrectas. ¡Revísalas e inténtalo de nuevo!';
+                              feedbackDiv.classList.remove('hidden', 'correct');
+                              feedbackDiv.classList.add('incorrect');
+                              firstIncorrectFeedback = feedbackDiv; // Mark that we've shown feedback
+                         }
+                         // Optionally highlight incorrect question (more complex UI)
+                         questionDiv.classList.add('border', 'border-red-500', 'rounded-lg', 'p-2');
+                     } else {
+                         // Optionally highlight correct question (more complex UI)
+                          questionDiv.classList.remove('border', 'border-red-500');
+                          questionDiv.classList.add('border', 'border-green-500', 'rounded-lg', 'p-2');
+                     }
+                 });
+
+                const feedbackDiv = form.querySelector('.quiz-feedback');
+                const nextButton = form.querySelector('.next-btn');
+
+                 if (allCorrect) {
+                     feedbackDiv.textContent = '¡Todas las respuestas son correctas!';
+                     feedbackDiv.classList.remove('hidden', 'incorrect');
+                     feedbackDiv.classList.add('correct');
+                     questions.forEach(q => q.classList.remove('border-red-500')); // Clear red borders if any
+                     if (nextButton) {
+                         nextButton.classList.remove('hidden');
+                     }
+                     // Unlock next based on form data attributes
+                     const nextSectionSelector = form.dataset.next;
+                     const missionToUnlock = form.dataset.unlockMission;
+                     if(nextSectionSelector) unlockLink(`#link-${nextSectionSelector.substring(1)}`);
+                     if(missionToUnlock) unlockMission(missionToUnlock);
+
+                 } else if (!firstIncorrectFeedback) { // Only show general feedback if no specific incorrect answer was found
+                     feedbackDiv.textContent = 'Por favor responde todas las preguntas.';
+                     feedbackDiv.classList.remove('hidden', 'correct');
+                     feedbackDiv.classList.add('incorrect');
+                 }
+
+                 if (!allCorrect && nextButton) {
+                     nextButton.classList.add('hidden');
+                 }
+             }
+
+            // --- Event Listeners ---
+            // Sidebar link clicks (delegated)
+             sidebar.addEventListener('click', (e) => {
+                 const link = e.target.closest('a.nav-item:not(.disabled)');
+                 if (link && link.getAttribute('href').startsWith('#')) {
+                     e.preventDefault();
+                     const targetId = link.getAttribute('href').substring(1);
+                     showContent(targetId);
+                     if (window.innerWidth < 768) {
+                        sidebar.classList.add('-translate-x-full');
+                     }
+                 }
+             });
+
+             // Start button
+             const startBtn = document.getElementById('start-btn');
+             if(startBtn){
+                startBtn.addEventListener('click', () => {
+                   const nextTarget = startBtn.dataset.next;
+                   if(nextTarget) {
+                       unlockLink(`#link-${nextTarget.substring(1)}`);
+                       showContent(nextTarget.substring(1));
+                   }
+                });
+             }
+
+
+            // Next buttons
+            nextButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                     e.preventDefault(); // Prevent default if it's somehow a link
+                     const nextTarget = button.dataset.next;
+                     if (nextTarget) {
+                        // Special case for introduction start button
+                        if (activeSectionId === 'introduccion') {
+                           unlockLink(`#link-modulo-cero`);
+                        }
+                         showContent(nextTarget.substring(1));
+                     }
+                });
+            });
+
+            // Quiz form submissions
+            const quizForms = document.querySelectorAll('.quiz-form');
+            quizForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    handleQuizSubmission(form);
+                });
+            });
+
+            // --- Sidebar Collapse Logic ---
+            mobileToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            desktopToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('sidebar-collapsed');
+                body.classList.toggle('sidebar-is-collapsed');
+                
+                if (sidebar.classList.contains('sidebar-collapsed')) {
+                    desktopToggleIcon.classList.replace('fa-angle-double-left', 'fa-angle-double-right');
+                } else {
+                    desktopToggleIcon.classList.replace('fa-angle-double-right', 'fa-angle-double-left');
+                }
+            });
+
+            // --- Modal Logic (unchanged) ---
+            const showSolutionBtn = document.getElementById('show-solution-btn');
+            const solutionModal = document.getElementById('solution-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            if(showSolutionBtn) {
+                 showSolutionBtn.addEventListener('click', () => solutionModal.classList.remove('hidden'));
+            }
+            if(closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => solutionModal.classList.add('hidden'));
+            }
+            solutionModal.addEventListener('click', (e) => {
+                if (e.target === solutionModal) {
+                    solutionModal.classList.add('hidden');
+                }
+            });
+            
+             // --- Initial State ---
+             showContent(activeSectionId); // Ensure only intro is visible initially
+             // Unlock intro link just in case
+             unlockLink('#link-introduccion');
+
+
+        });
+    </script>
+</body>
+</html>
+
